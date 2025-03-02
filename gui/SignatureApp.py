@@ -6,13 +6,16 @@ from PyQt6.QtWidgets import (
     QLineEdit, QLabel, QStackedWidget, QGroupBox, QGridLayout, QMessageBox, QFrame
 )
 from PyQt6.QtGui import QFont, QIcon
-from PyQt6.QtCore import Qt, QPropertyAnimation
+from PyQt6.QtCore import Qt, QPropertyAnimation, QTimer
 
 from constants import STYLES_DIR_PATH, LOGGER_GLOBAL_NAME
+from utils.usb_handler import check_for_usb_device
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 class SignatureApp(QWidget):
+    # ========== INITIALIZE GUI ==========
+
     def __init__(self):
         self.page_verify = None
         self.page_sign = None
@@ -55,7 +58,11 @@ class SignatureApp(QWidget):
         self.btn_usb.setDisabled(True)
 
         for btn in [self.btn_keygen, self.btn_sign, self.btn_verify, self.btn_usb]:
-            btn.setFixedHeight(50)
+            if btn == self.btn_usb:
+                btn.setFixedHeight(80)
+            else:
+                btn.setFixedHeight(50)
+
             self.side_menu.addWidget(btn)
 
         self.side_menu.addStretch()
@@ -80,7 +87,10 @@ class SignatureApp(QWidget):
 
         self.setLayout(self.main_layout)
 
+        self.update_usb_status()
+
     # ========== CREATE PAGES ==========
+
     def create_keygen_page(self):
         logger.info("Creating Keygen Page...")
         page = QWidget()
@@ -158,6 +168,24 @@ class SignatureApp(QWidget):
         return page
 
     # ========== PAGE SWITCHING ==========
+
     def switch_page(self, index):
         self.content_area.setCurrentIndex(index)
         logger.info(f"Switched to page {index}")
+
+    # ========== USB STATUS ==========
+
+    def update_usb_status(self):
+        result, drives = check_for_usb_device()
+        if result:
+            (self.btn_usb.setText
+                (
+                f"✅ USB detected\n"
+                f"{drives[0]['device']}{drives[0]['name']}"
+                )
+            )
+        else:
+            self.btn_usb.setText("❌ No USB detected")
+
+        QTimer.singleShot(5000, self.update_usb_status)
+
