@@ -1,5 +1,7 @@
 # PAdES-application
+Project is a part of the assignment in Computer Systems Security course at Gdańsk University of Technology.
 The main task of the project is to design and develop an application to make a qualified electronic signature according to PAdES (PDF Advanced Electronic Signature) standard concept.
+
 
 In general, the application must take a form of a set of
 tools for realization the qualified electronic signature. The general concept is pointed
