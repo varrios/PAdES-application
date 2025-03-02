@@ -14,10 +14,23 @@ logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 class SignatureApp(QWidget):
     def __init__(self):
-        logger.info("Initializing SignatureApp")
+        self.page_verify = None
+        self.page_sign = None
+        self.page_keygen = None
+        self.btn_usb = None
+        self.btn_verify = None
+        self.btn_sign = None
+        self.btn_keygen = None
+        self.main_layout = None
+        self.side_menu = None
+        self.content_area = None
+        
+        
+        logger.info("Initializing SignatureApp...")
         super().__init__()
         self.initUI()
         self.show()
+        logger.info("SignatureApp initialized")
 
     def initUI(self):
         self.setWindowTitle("PAdES Signature Tool")
@@ -58,9 +71,9 @@ class SignatureApp(QWidget):
         self.content_area.addWidget(self.page_sign)  # Index 1
         self.content_area.addWidget(self.page_verify)  # Index 2
 
-        self.btn_keygen.clicked.connect(lambda: self.switch_page(0))
-        self.btn_sign.clicked.connect(lambda: self.switch_page(1))
-        self.btn_verify.clicked.connect(lambda: self.switch_page(2))
+        self.btn_keygen.clicked.connect(lambda x: self.switch_page(0))
+        self.btn_sign.clicked.connect(lambda x: self.switch_page(1))
+        self.btn_verify.clicked.connect(lambda x: self.switch_page(2))
 
         self.main_layout.addLayout(self.side_menu, 1)
         self.main_layout.addWidget(self.content_area, 4)
@@ -73,24 +86,24 @@ class SignatureApp(QWidget):
         page = QWidget()
         layout = QVBoxLayout()
 
-        group = QGroupBox("🔑 Generate RSA Key Pair & Store on USB")
+        group = QGroupBox("🔑 Generate RSA Key Pair and store on USB")
         group_layout = QGridLayout()
 
-        self.btn_generate_keys = QPushButton("🔄 Generate RSA Keys")
-        self.btn_select_usb = QPushButton("💾 Select USB Storage")
-        self.input_pin = QLineEdit()
-        self.input_pin.setPlaceholderText("Enter PIN (for encryption)")
-        self.btn_save_key = QPushButton("🔐 Save Encrypted Private Key")
+        btn_generate_keys = QPushButton("🔄 Generate RSA Keys")
+        btn_select_usb = QPushButton("💾 Select USB Storage")
+        input_pin = QLineEdit()
+        input_pin.setPlaceholderText("Enter PIN (for encryption)")
+        btn_save_key = QPushButton("🔐 Save Encrypted Private Key")
 
-        group_layout.addWidget(self.btn_generate_keys, 0, 0, 1, 2)
-        group_layout.addWidget(self.btn_select_usb, 1, 0, 1, 2)
-        group_layout.addWidget(self.input_pin, 2, 0)
-        group_layout.addWidget(self.btn_save_key, 2, 1)
+        group_layout.addWidget(btn_generate_keys, 0, 0, 1, 2)
+        group_layout.addWidget(btn_select_usb, 1, 0, 1, 2)
+        group_layout.addWidget(input_pin, 2, 0)
+        group_layout.addWidget(btn_save_key, 2, 1)
 
         group.setLayout(group_layout)
         layout.addWidget(group)
         page.setLayout(layout)
-        logger.info("Keygen Page created...")
+        logger.info("Keygen Page created!")
         return page
 
     def create_sign_page(self):
@@ -101,21 +114,21 @@ class SignatureApp(QWidget):
         group = QGroupBox("✍️ Select PDF & Sign with RSA Key")
         group_layout = QGridLayout()
 
-        self.btn_select_pdf = QPushButton("📄 Select PDF to Sign")
-        self.btn_load_key = QPushButton("🔍 Detect USB & Load Private Key")
-        self.input_sign_pin = QLineEdit()
-        self.input_sign_pin.setPlaceholderText("Enter PIN to Decrypt Key")
-        self.btn_sign = QPushButton("✔️ Sign & Save PDF")
+        btn_select_pdf = QPushButton("📄 Select PDF to Sign")
+        btn_load_key = QPushButton("🔍 Detect USB & Load Private Key")
+        input_sign_pin = QLineEdit()
+        input_sign_pin.setPlaceholderText("Enter PIN to Decrypt Key")
+        btn_sign = QPushButton("✔️ Sign & Save PDF")
 
-        group_layout.addWidget(self.btn_select_pdf, 0, 0, 1, 2)
-        group_layout.addWidget(self.btn_load_key, 1, 0, 1, 2)
-        group_layout.addWidget(self.input_sign_pin, 2, 0)
-        group_layout.addWidget(self.btn_sign, 2, 1)
+        group_layout.addWidget(btn_select_pdf, 0, 0, 1, 2)
+        group_layout.addWidget(btn_load_key, 1, 0, 1, 2)
+        group_layout.addWidget(input_sign_pin, 2, 0)
+        group_layout.addWidget(btn_sign, 2, 1)
 
         group.setLayout(group_layout)
         layout.addWidget(group)
         page.setLayout(layout)
-        logger.info("Sign Page created...")
+        logger.info("Sign Page created!")
         return page
 
     def create_verify_page(self):
@@ -126,26 +139,25 @@ class SignatureApp(QWidget):
         group = QGroupBox("✅ Verify Signed PDF")
         group_layout = QGridLayout()
 
-        self.btn_select_signed_pdf = QPushButton("📄 Select Signed PDF")
-        self.btn_load_public_key = QPushButton("🔑 Load Public Key")
-        self.btn_verify = QPushButton("🔎 Verify Signature")
-        self.label_result = QLabel("🔍 Signature Status: ❓")
-        self.label_result.setFont(QFont("Arial", 12, QFont.Weight.Bold))
-        self.label_result.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        btn_select_signed_pdf = QPushButton("📄 Select Signed PDF")
+        btn_load_public_key = QPushButton("🔑 Load Public Key")
+        btn_verify = QPushButton("🔎 Verify Signature")
+        label_result = QLabel("🔍 Signature Status: ❓")
+        label_result.setFont(QFont("Arial", 12, QFont.Weight.Bold))
+        label_result.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        group_layout.addWidget(self.btn_select_signed_pdf, 0, 0, 1, 2)
-        group_layout.addWidget(self.btn_load_public_key, 1, 0, 1, 2)
-        group_layout.addWidget(self.btn_verify, 2, 0, 1, 2)
-        group_layout.addWidget(self.label_result, 3, 0, 1, 2)
+        group_layout.addWidget(btn_select_signed_pdf, 0, 0, 1, 2)
+        group_layout.addWidget(btn_load_public_key, 1, 0, 1, 2)
+        group_layout.addWidget(btn_verify, 2, 0, 1, 2)
+        group_layout.addWidget(label_result, 3, 0, 1, 2)
 
         group.setLayout(group_layout)
         layout.addWidget(group)
         page.setLayout(layout)
-        logger.info("Verify Page created...")
+        logger.info("Verify Page created!")
         return page
 
     # ========== PAGE SWITCHING ==========
     def switch_page(self, index):
-        logger.info(f"Switching to page {index}")
         self.content_area.setCurrentIndex(index)
-
+        logger.info(f"Switched to page {index}")
