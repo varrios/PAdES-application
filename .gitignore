@@ -1,6 +1,6 @@
 # Project-exclusive directories and files
 keys/
-
+logs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
