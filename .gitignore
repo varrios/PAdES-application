@@ -1,3 +1,7 @@
+# Project-exclusive directories and files
+keys/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
