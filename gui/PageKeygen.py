@@ -1,9 +1,12 @@
 import logging
 
-from PyQt6.QtGui import QIcon, QIntValidator
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIntValidator
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QGridLayout, QPushButton, QLineEdit, QHBoxLayout, \
-    QGraphicsOpacityEffect, QLabel
+    QLabel, QMessageBox, QProgressDialog
+
 from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, MAX_PIN_LENGTH
+from utils.RSAWorkerThread import RSAWorkerThread
 from utils.misc import change_opacity
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
@@ -43,18 +46,19 @@ class KeygenPage(QWidget):
         self._pinpad_init()
 
         self._btn_save_key = QPushButton("🔐 Generate RSA Key Pair and Save Encrypted Private Key on USB drive")
+        self._btn_save_key.clicked.connect(self._generate_and_encrypt_keypair)
 
-        keyname_input_label = QLabel("Enter key filename:")
+        #keyname_input_label = QLabel("Enter key filename:")
 
         self._key_filename_input = QLineEdit()
-        self._key_filename_input.setPlaceholderText("Enter key filename")
+        self._key_filename_input.setPlaceholderText("Key filename")
         self._key_filename_input.setMaxLength(50)
-        self._key_filename_input.setText("default_keyname")
+        #self._key_filename_input.setText("default_keyname")
 
 
         self._group_layout.addLayout(self._pin_layout)
         self._group_layout.addLayout(self._numpad_layout)
-        self._group_layout.addWidget(keyname_input_label)
+        #self._group_layout.addWidget(keyname_input_label)
         self._group_layout.addWidget(self._key_filename_input)
         self._group_layout.addWidget(self._btn_save_key)
 
@@ -130,9 +134,62 @@ class KeygenPage(QWidget):
             self.setEnabled(True)
             change_opacity(widget=self, value=1.0)
 
+    # ========== HELPER FUNCTIONS ==========
 
-    # ========== BUTTON FUNCTIONS ==========
-    
+    def _validate_user_entries(self):
+        if not self._input_pin.text():
+            error_message = "PIN is empty"
+
+            logger.error(error_message)
+
+            error_dialog = QMessageBox.critical(
+                self,
+                "Validation error",
+                error_message,
+                buttons=QMessageBox.StandardButton.Ok,
+                defaultButton=QMessageBox.StandardButton.Ok,
+            )
+            return False
+        if not self._key_filename_input.text():
+            error_message = "Key filename is empty"
+            logger.error(error_message)
+            error_dialog = QMessageBox.critical(
+                self,
+                "Validation error",
+                error_message,
+                buttons=QMessageBox.StandardButton.Ok,
+                defaultButton=QMessageBox.StandardButton.Ok,
+            )
+            return False
+        return True
 
 
+    # ========== RSA WORKER THREADED FUNCTIONALITY ==========
+
+    def _generate_and_encrypt_keypair(self):
+        if not self._validate_user_entries():
+            return
+        pin = self._input_pin.text()
+        key_filename = self._key_filename_input.text()
+        usb_path = self.parent_app.usb_path
+
+        self._progress_dialog = QProgressDialog("Starting...", None, 0, 0, self)
+        self._progress_dialog.setWindowTitle("Key generation and encryption status")
+        self._progress_dialog.setCancelButton(None)
+        self._progress_dialog.setMinimumDuration(0)
+        self._progress_dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
+        self._progress_dialog.setWindowFlag(Qt.WindowType.WindowCloseButtonHint, False)
+        self._progress_dialog.setGeometry(300, 300, 400, 100)
+        self._progress_dialog.show()
+
+        self._rsa_worker_thread = RSAWorkerThread(pin=pin, filename=key_filename, usb_path=usb_path)
+        self._rsa_worker_thread.progress_signal.connect(self._rsa_worker_update_progress)
+        self._rsa_worker_thread.finished_signal.connect(self._rsa_worker_task_finished)
+        self._rsa_worker_thread.start()
+
+    def _rsa_worker_update_progress(self, message):
+        self._progress_dialog.setLabelText(message)
+
+    def _rsa_worker_task_finished(self):
+        self._progress_dialog.close()
 

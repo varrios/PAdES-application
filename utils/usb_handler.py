@@ -45,6 +45,6 @@ def search_usb_for_private_key(usb_path) -> list:
 def search_local_machine_for_public_key(local_machine_path) -> list:
     key_files_found = []
 
-    for path in Path(local_machine_path).rglob('*.pub'):
+    for path in Path(local_machine_path).rglob('*.pem'):
         key_files_found.append(path)
     return key_files_found
