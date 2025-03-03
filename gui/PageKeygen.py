@@ -182,8 +182,8 @@ class KeygenPage(QWidget):
         self._progress_dialog.show()
 
         self._rsa_worker_thread = RSAWorkerThread(pin=pin, filename=key_filename, usb_path=usb_path)
-        self._rsa_worker_thread.progress_signal.connect(self._rsa_worker_update_progress)
-        self._rsa_worker_thread.finished_signal.connect(self._rsa_worker_task_finished)
+        self._rsa_worker_thread.change_progress_signal.connect(self._rsa_worker_update_progress)
+        self._rsa_worker_thread.task_finished_signal.connect(self._rsa_worker_task_finished)
         self._rsa_worker_thread.start()
 
     def _rsa_worker_update_progress(self, message):
