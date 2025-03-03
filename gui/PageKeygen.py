@@ -1,10 +1,21 @@
+import logging
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QGridLayout, QPushButton, QLineEdit
+from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME
+
+logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 
 class KeygenPage(QWidget):
     def __init__(self):
-        super().__init__()
-        self.initUI()
+        logger.info("Initializing KeygenPage UI...")
+        try:
+            super().__init__()
+            self.initUI()
+            self.setObjectName(KEYGEN_PAGE_NAME)
+        except Exception as e:
+            logger.error(f"Error initializing KeygenPage: {e}")
+        else:
+            logger.info("KeygenPage initialized successfully")
 
     def initUI(self):
         layout = QVBoxLayout()

@@ -1,12 +1,21 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont
+import logging
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QGridLayout, QPushButton, QLineEdit, QLabel
+from constants import LOGGER_GLOBAL_NAME, SIGN_PAGE_NAME
+
+logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 
 class SignPage(QWidget):
     def __init__(self):
-        super().__init__()
-        self.initUI()
+        logger.info("Initializing SignPage UI...")
+        try:
+            super().__init__()
+            self.initUI()
+            self.setObjectName(SIGN_PAGE_NAME)
+        except Exception as e:
+            logger.error(f"Error initializing SignPage: {e}")
+        else:
+            logger.info("SignPage initialized successfully")
 
     def initUI(self):
         layout = QVBoxLayout()

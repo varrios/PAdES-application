@@ -18,7 +18,8 @@ def initialize_logger():
         level=logging.INFO,
         format='%(asctime)s - %(message)s',
         handlers=[
-            logging.FileHandler(f'{BASE_PROJECT_PATH}/{LOGS_DIRNAME}/{CURRENT_TIME}_{LOGS_FILENAME}', encoding='utf-8'),
+            #logging.FileHandler(f'{BASE_PROJECT_PATH}/{LOGS_DIRNAME}/{CURRENT_TIME}_{LOGS_FILENAME}', encoding='utf-8'),
+            logging.FileHandler(f'{BASE_PROJECT_PATH}/{LOGS_DIRNAME}/{LOGS_FILENAME}', encoding='utf-8', mode='w'),
             logging.StreamHandler(sys.stdout)
         ]
     )

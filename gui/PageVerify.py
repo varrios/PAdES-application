@@ -1,12 +1,23 @@
+import logging
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QGridLayout, QPushButton, QLineEdit, QLabel
+from constants import LOGGER_GLOBAL_NAME, VERIFY_PAGE_NAME
+
+logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 
 class VerifyPage(QWidget):
     def __init__(self):
-        super().__init__()
-        self.initUI()
+        logger.info("Initializing VerifyPage UI...")
+        try:
+            super().__init__()
+            self.initUI()
+            self.setObjectName(VERIFY_PAGE_NAME)
+        except Exception as e:
+            logger.error(f"Error initializing VerifyPage: {e}")
+        else:
+            logger.info("VerifyPage initialized successfully")
 
     def initUI(self):
         layout = QVBoxLayout()

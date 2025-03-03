@@ -1,14 +1,15 @@
 import logging
 import os
-import sys
-from PyQt6.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QFileDialog,
-    QLineEdit, QLabel, QStackedWidget, QGroupBox, QGridLayout, QMessageBox, QFrame
-)
-from PyQt6.QtGui import QFont, QIcon
-from PyQt6.QtCore import Qt, QPropertyAnimation, QTimer
 
-from constants import STYLES_DIR_PATH, LOGGER_GLOBAL_NAME
+from PyQt6.QtCore import QTimer
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import (
+    QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QStackedWidget
+)
+
+from constants import STYLES_DIR_PATH, LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERIFY_PAGE_NAME, \
+    MAIN_WINDOW_TITLE, ASSETS_DIR_PATH
+
 from gui.PageKeygen import KeygenPage
 from gui.PageSign import SignPage
 from gui.PageVerify import VerifyPage
@@ -20,14 +21,15 @@ class SignatureApp(QWidget):
     # ========== INITIALIZE GUI ==========
 
     def __init__(self):
-        logger.info("Initializing SignatureApp...")
+        logger.info("==== INITIALIZING GUI ====")
         super().__init__()
         self.initUI()
         self.show()
-        logger.info("SignatureApp initialized")
+        logger.info("==== GUI INITIALIZATION FINISHED ====")
 
     def initUI(self):
-        self.setWindowTitle("PAdES Signature Tool")
+        self.setWindowTitle(MAIN_WINDOW_TITLE)
+        self.setWindowIcon(QIcon(os.path.join(ASSETS_DIR_PATH, 'icon.png')))
         self.setGeometry(100, 100, 900, 500)
 
         self.load_stylesheet()
@@ -49,9 +51,9 @@ class SignatureApp(QWidget):
 
     # ========== PAGE SWITCHING ==========
 
-    def switch_page(self, index):
-        self.content_area.setCurrentIndex(index)
-        logger.info(f"Switched to page {index}")
+    def switch_page(self, page_name):
+        self.content_area.setCurrentWidget(self.content_area.findChild(QWidget, page_name))
+        logger.info(f"Switched to page {page_name}")
 
     # ========== USB STATUS ==========
 
@@ -77,6 +79,8 @@ class SignatureApp(QWidget):
                 self.setStyleSheet(f.read())
         except Exception as e:
             logger.error(f"Error loading CSS file: {e}")
+        else:
+            logger.info("CSS file loaded successfully")
 
     # ========== SIDE MENU ==========
 
@@ -109,10 +113,10 @@ class SignatureApp(QWidget):
         self.page_sign = SignPage()
         self.page_verify = VerifyPage()
 
-        self.content_area.addWidget(self.page_keygen)  # Index 0
-        self.content_area.addWidget(self.page_sign)  # Index 1
-        self.content_area.addWidget(self.page_verify)  # Index 2
+        self.content_area.addWidget(self.page_keygen)
+        self.content_area.addWidget(self.page_sign)
+        self.content_area.addWidget(self.page_verify)
 
-        self.btn_keygen.clicked.connect(lambda x: self.switch_page(0))
-        self.btn_sign.clicked.connect(lambda x: self.switch_page(1))
-        self.btn_verify.clicked.connect(lambda x: self.switch_page(2))
+        self.btn_keygen.clicked.connect(lambda x: self.switch_page(page_name=KEYGEN_PAGE_NAME))
+        self.btn_sign.clicked.connect(lambda x: self.switch_page(page_name=SIGN_PAGE_NAME))
+        self.btn_verify.clicked.connect(lambda x: self.switch_page(page_name=VERIFY_PAGE_NAME))
