@@ -8,18 +8,19 @@ logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 
 class VerifyPage(QWidget):
-    def __init__(self):
+    def __init__(self, parent):
         logger.info("Initializing VerifyPage UI...")
         try:
+            self.parent_app = parent
             super().__init__()
-            self.initUI()
+            self._init_ui()
             self.setObjectName(VERIFY_PAGE_NAME)
         except Exception as e:
             logger.error(f"Error initializing VerifyPage: {e}")
         else:
             logger.info("VerifyPage initialized successfully")
 
-    def initUI(self):
+    def _init_ui(self):
         layout = QVBoxLayout()
 
         group = QGroupBox("✅ Verify Signed PDF")
@@ -40,3 +41,6 @@ class VerifyPage(QWidget):
         group.setLayout(group_layout)
         layout.addWidget(group)
         self.setLayout(layout)
+
+    def refresh_page(self):
+        logger.info("Refreshing VerifyPage...")

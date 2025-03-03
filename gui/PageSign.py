@@ -6,18 +6,19 @@ logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 
 class SignPage(QWidget):
-    def __init__(self):
+    def __init__(self, parent):
         logger.info("Initializing SignPage UI...")
         try:
+            self.parent_app = parent
             super().__init__()
-            self.initUI()
+            self._init_ui()
             self.setObjectName(SIGN_PAGE_NAME)
         except Exception as e:
             logger.error(f"Error initializing SignPage: {e}")
         else:
             logger.info("SignPage initialized successfully")
 
-    def initUI(self):
+    def _init_ui(self):
         layout = QVBoxLayout()
 
         group = QGroupBox("✍️ Select PDF & Sign with RSA Key")
@@ -37,3 +38,6 @@ class SignPage(QWidget):
         group.setLayout(group_layout)
         layout.addWidget(group)
         self.setLayout(layout)
+
+    def refresh_page(self):
+        logger.info("Refreshing SignPage...")

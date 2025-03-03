@@ -10,7 +10,7 @@ from constants import LOGGER_GLOBAL_NAME
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 
-def check_for_usb_device() -> tuple[bool, list]:
+def check_for_usb_device() -> tuple[bool, list | None]:
     usb_disks = []
 
     for partition in psutil.disk_partitions(all=True):
@@ -29,15 +29,22 @@ def check_for_usb_device() -> tuple[bool, list]:
             })
 
     if usb_disks:
-        print(f"USB storage devices detected: {usb_disks}")
+        logger.info(f"USB storage devices detected: {len(usb_disks)}")
         return True, usb_disks
     else:
-        print("No USB storage devices detected.")
+        logger.info("No USB storage devices detected")
         return False, None
 
 def search_usb_for_private_key(usb_path) -> list:
     key_files_found = []
 
     for path in Path(usb_path).rglob('*.key'):
+        key_files_found.append(path)
+    return key_files_found
+
+def search_local_machine_for_public_key(local_machine_path) -> list:
+    key_files_found = []
+
+    for path in Path(local_machine_path).rglob('*.pub'):
         key_files_found.append(path)
     return key_files_found

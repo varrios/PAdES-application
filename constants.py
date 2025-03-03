@@ -3,6 +3,7 @@ import os
 #### MISC ####
 
 RSA_KEY_LENGTH = 4096
+MAX_PIN_LENGTH = 6
 
 #### LOGGER ####
 
@@ -20,6 +21,7 @@ ASSETS_DIR_PATH = os.path.join(BASE_PROJECT_PATH, 'gui', 'assets')
 
 STYLESHEET_FILE_PATH = os.path.join(STYLES_DIR_PATH, 'signature_app.css')
 ICON_FILE_PATH = os.path.join(ASSETS_DIR_PATH, 'icon.png')
+KEYS_DIR_PATH= os.path.join(BASE_PROJECT_PATH, KEYS_DIRNAME)
 
 #### GUI CONSTANTS ####
 
