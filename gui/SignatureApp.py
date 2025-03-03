@@ -12,7 +12,7 @@ from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERI
 from gui.PageKeygen import KeygenPage
 from gui.PageSign import SignPage
 from gui.PageVerify import VerifyPage
-from utils.usb_handler import check_for_usb_device, search_usb_for_private_key, search_local_machine_for_public_key
+from utility.usb_handler import check_for_usb_device, search_usb_for_private_key, search_local_machine_for_public_key
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
@@ -130,8 +130,11 @@ class SignatureApp(QWidget):
     # ========== REFRESH PAGE ==========
 
     def _refresh_pages(self):
+        logger.info("Refreshing pages...")
         self._update_usb_status()
-        self._content_area.currentWidget().refresh_page()
+        self._page_sign.refresh_page()
+        self._page_keygen.refresh_page()
+        self._page_verify.refresh_page()
         QTimer.singleShot(2000, self._refresh_pages)
 
     # ========== STYLESHEET ==========

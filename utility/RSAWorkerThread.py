@@ -4,7 +4,7 @@ from time import sleep
 from PyQt6.QtCore import QThread, pyqtSignal
 
 from constants import KEYS_DIR_PATH
-from utils.keygen import generate_RSA_keypair, encrypt_private_key
+from utility.keygen import generate_RSA_keypair, encrypt_private_key
 
 
 class RSAWorkerThread(QThread):

@@ -43,4 +43,4 @@ class VerifyPage(QWidget):
         self.setLayout(layout)
 
     def refresh_page(self):
-        logger.info("Refreshing VerifyPage...")
+        pass

@@ -6,8 +6,8 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QGridLayout, QPushB
     QLabel, QMessageBox, QProgressDialog
 
 from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, MAX_PIN_LENGTH
-from utils.RSAWorkerThread import RSAWorkerThread
-from utils.misc import change_opacity
+from utility.RSAWorkerThread import RSAWorkerThread
+from utility.misc import change_opacity
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
@@ -126,7 +126,6 @@ class KeygenPage(QWidget):
     # ========== REFRESH PAGE ==========
 
     def refresh_page(self):
-        logger.info("Refreshing KeygenPage...")
         if self.parent_app.usb_path is None:
             self.setEnabled(False)
             change_opacity(widget=self, value=0.5)
