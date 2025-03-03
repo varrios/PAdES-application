@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QIcon
@@ -11,7 +12,7 @@ from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERI
 from gui.PageKeygen import KeygenPage
 from gui.PageSign import SignPage
 from gui.PageVerify import VerifyPage
-from utils.usb_handler import check_for_usb_device
+from utils.usb_handler import check_for_usb_device, search_usb_for_private_key
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
@@ -19,6 +20,22 @@ class SignatureApp(QWidget):
     # ========== INITIALIZE GUI ==========
 
     def __init__(self):
+        self.side_menu = None
+        self.content_area = None
+
+        self.btn_usb = None
+        self.btn_verify = None
+        self.btn_sign = None
+        self.btn_keygen = None
+
+        self.page_verify = None
+        self.page_sign = None
+        self.page_keygen = None
+
+        # USB handling
+        self.usb_path : Path | None = None
+        self.private_key_found : bool = False
+        self.public_key_found : bool = False
         logger.info("==== INITIALIZING GUI ====")
         try:
             super().__init__()
@@ -57,21 +74,34 @@ class SignatureApp(QWidget):
         self.content_area.setCurrentWidget(self.content_area.findChild(QWidget, page_name))
         logger.info(f"Switched to page {page_name}")
 
-    # ========== USB STATUS ==========
+    # ========== USB HANDLING ==========
 
     def update_usb_status(self):
         result, drives = check_for_usb_device()
-        if result:
-            (self.btn_usb.setText
-                (
-                f"✅ USB detected\n"
-                f"{drives[0]['device']}{drives[0]['name']}"
-                )
-            )
-        else:
-            self.btn_usb.setText("❌ No USB detected")
+        status_message = ""
 
-        QTimer.singleShot(5000, self.update_usb_status)
+        if result:
+            self.usb_path = drives[0]['device']
+            status_message += \
+                (
+                    f"🟢 USB detected\n"
+                    f"{drives[0]['device']}{drives[0]['name']}"
+                )
+            private_keys_found = search_usb_for_private_key(usb_path=self.usb_path)
+            if private_keys_found:
+                status_message += \
+                    (
+                        f"\n🔑 Private key found on USB at:\n"
+                        f"{str(private_keys_found[0])}"
+                    )
+            else:
+                status_message += "\n❌ No private key found on USB drive"
+        else:
+            self.usb_path = None
+            status_message += "❌ No USB detected"
+
+        self.btn_usb.setText(status_message)
+        QTimer.singleShot(2000, self.update_usb_status)
 
     # ========== STYLESHEET ==========
 
@@ -98,7 +128,7 @@ class SignatureApp(QWidget):
 
         for btn in [self.btn_keygen, self.btn_sign, self.btn_verify, self.btn_usb]:
             if btn == self.btn_usb:
-                btn.setFixedHeight(80)
+                btn.setFixedHeight(120)
             else:
                 btn.setFixedHeight(50)
 
