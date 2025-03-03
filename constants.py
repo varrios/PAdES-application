@@ -18,6 +18,8 @@ KEYS_DIRNAME = 'keys'
 STYLES_DIR_PATH = os.path.join(BASE_PROJECT_PATH, 'gui', 'styles')
 ASSETS_DIR_PATH = os.path.join(BASE_PROJECT_PATH, 'gui', 'assets')
 
+STYLESHEET_FILE_PATH = os.path.join(STYLES_DIR_PATH, 'signature_app.css')
+ICON_FILE_PATH = os.path.join(ASSETS_DIR_PATH, 'icon.png')
 
 #### GUI CONSTANTS ####
 

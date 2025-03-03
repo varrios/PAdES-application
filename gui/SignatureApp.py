@@ -1,5 +1,4 @@
 import logging
-import os
 
 from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QIcon
@@ -7,9 +6,8 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QStackedWidget
 )
 
-from constants import STYLES_DIR_PATH, LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERIFY_PAGE_NAME, \
-    MAIN_WINDOW_TITLE, ASSETS_DIR_PATH
-
+from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERIFY_PAGE_NAME, \
+    MAIN_WINDOW_TITLE, ICON_FILE_PATH, STYLESHEET_FILE_PATH
 from gui.PageKeygen import KeygenPage
 from gui.PageSign import SignPage
 from gui.PageVerify import VerifyPage
@@ -22,14 +20,18 @@ class SignatureApp(QWidget):
 
     def __init__(self):
         logger.info("==== INITIALIZING GUI ====")
-        super().__init__()
-        self.initUI()
-        self.show()
-        logger.info("==== GUI INITIALIZATION FINISHED ====")
+        try:
+            super().__init__()
+            self.initUI()
+        except Exception as e:
+            logger.error(f"Error initializing GUI: {e}")
+        else:
+            self.show()
+            logger.info("==== GUI INITIALIZATION FINISHED ====")
 
     def initUI(self):
         self.setWindowTitle(MAIN_WINDOW_TITLE)
-        self.setWindowIcon(QIcon(os.path.join(ASSETS_DIR_PATH, 'icon.png')))
+        self.setWindowIcon(QIcon(ICON_FILE_PATH))
         self.setGeometry(100, 100, 900, 500)
 
         self.load_stylesheet()
@@ -75,7 +77,7 @@ class SignatureApp(QWidget):
 
     def load_stylesheet(self):
         try:
-            with open(os.path.join(STYLES_DIR_PATH, 'signature_app.css')) as f:
+            with open(STYLESHEET_FILE_PATH) as f:
                 self.setStyleSheet(f.read())
         except Exception as e:
             logger.error(f"Error loading CSS file: {e}")
