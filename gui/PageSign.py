@@ -5,6 +5,8 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QGridLayout, QPushB
     QMessageBox
 from constants import LOGGER_GLOBAL_NAME, SIGN_PAGE_NAME
 from utility.misc import change_opacity
+from utility.pdf_sign import sign_pdf_file
+
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
@@ -78,6 +80,9 @@ class SignPage(QWidget):
     def _sign_pdf_file(self):
         if not self._validate_user_entries():
             return
+        pin = self._input_sign_pin.text()
+        private_key_path = self.parent_app.private_key_path
+        sign_pdf_file(pin, self.pdf_filepath, private_key_path)
 
 
 
