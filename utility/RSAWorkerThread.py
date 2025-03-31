@@ -18,6 +18,7 @@ class RSAWorkerThread(QThread):
 
     def run(self):
         try:
+            sleep(1)
             self.change_progress_signal.emit("Generating RSA keypair...")
             private_key, public_key = generate_RSA_keypair()
             sleep(0.5)
@@ -45,9 +46,9 @@ class RSAWorkerThread(QThread):
             sleep(0.5)
         except Exception as e:
             self.change_progress_signal.emit("Generation and encryption failed. ❌ Please try again. \n Error: " + str(e))
-            sleep(2)
+            sleep(3)
             self.task_finished_signal.emit()
         else:
             self.change_progress_signal.emit("Generation and encryption finished successfully. ✅ ")
-            sleep(2)
+            sleep(3)
             self.task_finished_signal.emit()
