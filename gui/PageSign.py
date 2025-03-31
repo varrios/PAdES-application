@@ -1,10 +1,14 @@
 import logging
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIntValidator
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QGridLayout, QPushButton, QLineEdit, QLabel, QFileDialog, \
-    QMessageBox
+    QMessageBox, QProgressDialog, QProgressBar
 from constants import LOGGER_GLOBAL_NAME, SIGN_PAGE_NAME
+from utility.PDFWorkerThread import SignPDFWorkerThread
 from utility.misc import change_opacity
+from utility.pdf_sign import sign_pdf_file
+
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
@@ -65,6 +69,7 @@ class SignPage(QWidget):
 
 
     def _select_pdf_file(self):
+        logger.info("User prompted to select PDF file to sign")
         pdf_to_sign_path, _ = QFileDialog.getOpenFileName(
             self,
             "Select PDF to Sign",
@@ -72,15 +77,11 @@ class SignPage(QWidget):
             "PDF Files (*.pdf)"
         )
         if pdf_to_sign_path:
+            logger.info(f"User selected PDF file: {pdf_to_sign_path}")
             self.pdf_filepath = pdf_to_sign_path
             self._selected_file_label.setText(self.pdf_filepath)
-
-    def _sign_pdf_file(self):
-        if not self._validate_user_entries():
-            return
-
-
-
+        else:
+            logger.info("User cancelled PDF selection")
 
     def _validate_user_entries(self):
         if not self._input_sign_pin.text():
@@ -120,6 +121,35 @@ class SignPage(QWidget):
             return False
         return True
 
+    def _sign_pdf_file(self):
+        logger.info("User prompted to sign PDF file")
+        if not self._validate_user_entries():
+            return
+        pin = self._input_sign_pin.text()
+        private_key_path = self.parent_app.private_key_path
+        pdf_filepath = self.pdf_filepath
+
+        self._progress_dialog = QProgressDialog("Starting...", None, 0, 0, self)
+        self._progress_dialog.setWindowTitle("PDF signing status")
+        self._progress_dialog.setCancelButton(None)
+        self._progress_dialog.setMinimumDuration(0)
+        self._progress_dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
+        self._progress_dialog.setWindowFlag(Qt.WindowType.WindowCloseButtonHint, False)
+        self._progress_dialog.setGeometry(300, 300, 400, 100)
+
+        self._progress_dialog.show()
+
+        self._pdf_worker_thread = SignPDFWorkerThread(pdf_filepath=pdf_filepath, pin=pin, private_key_filepath=private_key_path)
+        self._pdf_worker_thread.change_progress_signal.connect(self._pdf_worker_update_progress)
+        self._pdf_worker_thread.task_finished_signal.connect(self._pdf_worker_task_finished)
+        self._pdf_worker_thread.start()
+
+    def _pdf_worker_update_progress(self, message):
+        logger.info(f"PDF signing progress: {message}")
+        self._progress_dialog.setLabelText(message)
+
+    def _pdf_worker_task_finished(self):
+        self._progress_dialog.close()
 
 
 

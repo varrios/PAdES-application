@@ -1,9 +1,14 @@
 import logging
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 import psutil
-import win32api
-import win32file
+# TYLKO NA WINDOWS - win32api, win32file
+
+if os.name == "nt":
+    import win32api 
+    import win32file
 
 from constants import LOGGER_GLOBAL_NAME
 
@@ -13,21 +18,27 @@ logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 def check_for_usb_device() -> tuple[bool, list | None]:
     usb_disks = []
 
-    for partition in psutil.disk_partitions(all=True):
-        device = partition.device
+    if os.name == "nt":
+        for partition in psutil.disk_partitions(all=True):
+            device = partition.device
 
-        drive_type = win32file.GetDriveType(device)
-        if drive_type == win32file.DRIVE_REMOVABLE:
-            try:
-                volume_name, _, _, _, _ = win32api.GetVolumeInformation(device)
-            except Exception:
-                volume_name = "Unknown"
+            drive_type = win32file.GetDriveType(device)
+            if drive_type == win32file.DRIVE_REMOVABLE:
+                try:
+                    volume_name, _, _, _, _ = win32api.GetVolumeInformation(device)
+                except Exception:
+                    volume_name = "Unknown"
 
-            usb_disks.append({
-                "device": device,
-                "name": volume_name
-            })
-
+                usb_disks.append({
+                    "device": device,
+                    "name": volume_name
+                })
+    else: # TESTING PURPOSES ONLY FOR UNIX-BASED SYSTEMS
+        load_dotenv()
+        usb_disks.append({
+            "device": os.getenv('CUSTOM_FILEPATH'),
+            "name": "USB SIMULATON"
+        })
     if usb_disks:
         logger.info(f"USB storage devices detected: {len(usb_disks)}")
         return True, usb_disks

@@ -1,6 +1,7 @@
 # Project-exclusive directories and files
 keys/
 logs/
+sample_pdf_files/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

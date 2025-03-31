@@ -7,6 +7,8 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QStackedWidget
 )
 
+
+
 from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERIFY_PAGE_NAME, \
     MAIN_WINDOW_TITLE, ICON_FILE_PATH, STYLESHEET_FILE_PATH, KEYS_DIR_PATH
 from gui.PageKeygen import KeygenPage
@@ -35,7 +37,11 @@ class SignatureApp(QWidget):
 
         # USB and Key handling
         self.usb_path : Path | None = None
+
+        self.private_key_path : Path | None = None
         self.private_key_found : bool = False
+        
+        self.public_key_path : Path | None = None
         self.public_key_found : bool = False
 
         logger.info("==== INITIALIZING GUI ====")
@@ -86,6 +92,7 @@ class SignatureApp(QWidget):
         public_keys_found = search_local_machine_for_public_key(local_machine_path=KEYS_DIR_PATH)
         if public_keys_found:
             self.public_key_found = True
+            self.public_key_path = public_keys_found[0]
             local_public_key_found_status += \
                 (
                     f"🔑 Public key found on local machine at:\n"
@@ -93,12 +100,15 @@ class SignatureApp(QWidget):
                 )
         else:
             self.public_key_found = False
+            self.public_key_path = None
             local_public_key_found_status += "❌ No public key found on local machine"
 
 
         # If USB detected, search for private key
         if not result:
             self.usb_path = None
+            self.private_key_found = False
+            self.private_key_path = None
             usb_found_status += "❌ No USB detected"
         else:
             self.usb_path = drives[0]['device']
@@ -111,6 +121,7 @@ class SignatureApp(QWidget):
             private_keys_found = search_usb_for_private_key(usb_path=self.usb_path)
             if private_keys_found:
                 self.private_key_found = True
+                self.private_key_path = private_keys_found[0]
                 usb_private_key_found_status += \
                     (
                         f"🔑 Private key found on USB at:\n"
