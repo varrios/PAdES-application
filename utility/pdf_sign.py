@@ -45,6 +45,6 @@ def sign_pdf_file(decrypted_private_key, pdf_filepath):
    writer.add_metadata({"/Signature": base64.b64encode(signature).decode()})
 
    dir_path, filename = os.path.split(pdf_filepath)
-   signed_pdf_filename = f"signed_{filename}"
+   signed_pdf_filename = f"SIGNED_{filename}"
    with open(os.path.join(dir_path, signed_pdf_filename), "wb") as f:
       writer.write(f)
