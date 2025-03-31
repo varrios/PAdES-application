@@ -1,3 +1,4 @@
+import logging
 import os
 
 from Cryptodome.Cipher import AES
@@ -10,6 +11,10 @@ from constants import RSA_KEY_LENGTH, KEYS_DIR_PATH
 '''
     "2nd auxillary application" functionality 
 '''
+from constants import LOGGER_GLOBAL_NAME
+
+logger = logging.getLogger(LOGGER_GLOBAL_NAME)
+
 
 def generate_RSA_keypair():
     key = RSA.generate(RSA_KEY_LENGTH)
@@ -21,10 +26,9 @@ def encrypt_private_key(private_key, pin):
     key = hashlib.sha256(pin.encode()).digest()
     cipher = AES.new(key, AES.MODE_GCM)
     ciphertext, tag = cipher.encrypt_and_digest(private_key)
-    return cipher.nonce, ciphertext, tag
+    return cipher.nonce + tag + ciphertext # Encrypted private key in this form will be saved to the USB drive
 
-def decrypt_private_key(nonce, ciphertext, tag, pin):
-    key = hashlib.sha256(pin.encode()).digest()
-    cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
-    return cipher.decrypt_and_verify(ciphertext, tag)
+
+
+
 

@@ -33,7 +33,7 @@ def check_for_usb_device() -> tuple[bool, list | None]:
                     "device": device,
                     "name": volume_name
                 })
-    else: # Tylko na MacOS i Linux - dla testów
+    else: # TESTING PURPOSES ONLY FOR UNIX-BASED SYSTEMS
         load_dotenv()
         usb_disks.append({
             "device": os.getenv('CUSTOM_FILEPATH'),

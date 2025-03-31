@@ -166,6 +166,7 @@ class KeygenPage(QWidget):
     # ========== RSA WORKER THREADED FUNCTIONALITY ==========
 
     def _generate_and_encrypt_keypair(self):
+        logger.info("User prompted for key generation and encryption")
         if not self._validate_user_entries():
             return
         pin = self._input_pin.text()
@@ -187,6 +188,7 @@ class KeygenPage(QWidget):
         self._rsa_worker_thread.start()
 
     def _rsa_worker_update_progress(self, message):
+        logger.info(f"Key generation and encryption progress: {message}")
         self._progress_dialog.setLabelText(message)
 
     def _rsa_worker_task_finished(self):

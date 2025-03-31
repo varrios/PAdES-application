@@ -1,15 +1,23 @@
+import hashlib
 
-from utility.keygen import decrypt_private_key
+from Cryptodome.Cipher import AES
+from Cryptodome.PublicKey import RSA
 
-def sign_pdf_file(pin, filepath, private_key_path):
-   print(f"Signing PDF file with pin={pin} filepath={filepath} private_key_path={private_key_path}")
-   
-   with open(private_key_path, "rb") as f:
-        data = f.read()
 
+def decrypt_private_key(private_key_filepath, pin):
+   with open(private_key_filepath, "rb") as f:
+      data = f.read()
    nonce = data[:16]
-   tag = data[-16:]
-   ciphertext = data[16:-16]
-   print(decrypt_private_key(nonce, ciphertext, tag, pin))
+   tag = data[16:32]
+   ciphertext = data[32:]
+
+   hashed_pin = hashlib.sha256(pin.encode()).digest()
+   cipher = AES.new(hashed_pin, AES.MODE_GCM, nonce=nonce)
+   return RSA.import_key(cipher.decrypt_and_verify(ciphertext, tag))
+
+
+
+def sign_pdf_file(decrypted_private_key, pdf_filepath):
+
 
    return
