@@ -27,14 +27,12 @@ class VerifyPage(QWidget):
         group_layout = QGridLayout()
 
         btn_select_signed_pdf = QPushButton("📄 Select Signed PDF")
-        btn_load_public_key = QPushButton("🔑 Load Public Key")
         btn_verify = QPushButton("🔎 Verify Signature")
         label_result = QLabel("🔍 Signature Status: ❓")
         label_result.setFont(QFont("Arial", 12, QFont.Weight.Bold))
         label_result.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         group_layout.addWidget(btn_select_signed_pdf, 0, 0, 1, 2)
-        group_layout.addWidget(btn_load_public_key, 1, 0, 1, 2)
         group_layout.addWidget(btn_verify, 2, 0, 1, 2)
         group_layout.addWidget(label_result, 3, 0, 1, 2)
 
