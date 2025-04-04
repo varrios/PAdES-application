@@ -1,0 +1,5 @@
+<map id="logger.logger.initialize_logger" name="logger.logger.initialize_logger">
+<area shape="rect" id="Node000001" title="Initializes and configures the application logger." alt="" coords="5,5,172,45"/>
+<area shape="rect" id="Node000002" href="$namespacelogger_1_1logger.html#ad860b8573a22166f41474aa4fbe41c52" title="Creates logs directory if it doesn&#39;t exist." alt="" coords="220,5,375,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,23,206,23,206,28,172,28"/>
+</map>

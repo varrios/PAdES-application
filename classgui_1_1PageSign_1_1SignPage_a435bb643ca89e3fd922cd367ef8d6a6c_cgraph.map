@@ -1,0 +1,9 @@
+<map id="gui.PageSign.SignPage._sign_pdf_file" name="gui.PageSign.SignPage._sign_pdf_file">
+<area shape="rect" id="Node000001" title="Initiates the PDF signing process with the private key." alt="" coords="5,69,177,109"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1PageKeygen_1_1KeygenPage.html#ab275367be11b21c44c69d669a4ada5f3" title="Validates user input before key generation." alt="" coords="225,5,437,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,67,242,46,243,51,168,72"/>
+<area shape="rect" id="Node000003" href="$classgui_1_1PageSign_1_1SignPage.html#aa2dd42151cefd12cb171bceb7418e7b3" title="Validates user input before signing." alt="" coords="245,69,417,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,87,231,87,231,92,177,92"/>
+<area shape="rect" id="Node000004" href="$classgui_1_1PageVerify_1_1VerifyPage.html#a8edb77a4634afaf45ff2006696d0f524" title="Validates user input before verification." alt="" coords="237,133,425,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="168,107,243,127,242,132,166,112"/>
+</map>

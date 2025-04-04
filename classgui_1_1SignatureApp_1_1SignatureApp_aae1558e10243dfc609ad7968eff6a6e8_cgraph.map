@@ -1,0 +1,11 @@
+<map id="gui.SignatureApp.SignatureApp._init_ui" name="gui.SignatureApp.SignatureApp._init_ui">
+<area shape="rect" id="Node000001" title="Sets up the user interface." alt="" coords="5,69,204,109"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#a33e33c901f8ba992a917c8a3cff0f48f" title="Creates the content area with all pages." alt="" coords="252,5,451,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,67,260,46,261,51,183,72"/>
+<area shape="rect" id="Node000004" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#af2d05d73902e7d75d029b4d750aced90" title="Creates the side navigation menu." alt="" coords="252,69,451,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="204,87,238,87,238,92,204,92"/>
+<area shape="rect" id="Node000005" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#a02a03b3803e553ce31c305ce03c57c0d" title="Loads the application stylesheet from CSS file." alt="" coords="252,133,451,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="183,107,261,127,260,132,182,112"/>
+<area shape="rect" id="Node000003" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#ade66c4b829fed9ce83fabe6ce64cfc52" title="Switches to the specified page." alt="" coords="499,5,697,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="451,23,485,23,485,28,451,28"/>
+</map>

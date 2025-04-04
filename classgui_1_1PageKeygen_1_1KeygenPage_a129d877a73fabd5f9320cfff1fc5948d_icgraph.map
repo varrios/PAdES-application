@@ -1,0 +1,5 @@
+<map id="gui.PageKeygen.KeygenPage._pinpad_init" name="gui.PageKeygen.KeygenPage._pinpad_init">
+<area shape="rect" id="Node000001" title="Initializes the PIN pad for secure PIN entry." alt="" coords="265,5,477,45"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1PageKeygen_1_1KeygenPage.html#a093c0a51790f446a68b37e0f73318a68" title="Sets up the user interface components." alt="" coords="5,5,217,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="252,28,218,28,218,23,252,23"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="gui.SignatureApp.SignatureApp._refresh_pages" name="gui.SignatureApp.SignatureApp._refresh_pages">
+<area shape="rect" id="Node000001" title="Refreshes all pages status periodically." alt="" coords="5,5,204,45"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#a8282a91a15ec784798a9e656b048b788" title="Checks USB status and updates the UI." alt="" coords="252,5,451,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,23,238,23,238,28,204,28"/>
+</map>
