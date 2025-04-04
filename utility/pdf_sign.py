@@ -48,3 +48,26 @@ def sign_pdf_file(decrypted_private_key, pdf_filepath):
    signed_pdf_filename = f"SIGNED_{filename}"
    with open(os.path.join(dir_path, signed_pdf_filename), "wb") as f:
       writer.write(f)
+
+def verify_pdf_signature(pdf_filepath, public_key_filepath):
+   try:
+      with open(public_key_filepath, "rb") as f:
+         public_key = RSA.import_key(f.read())
+
+      reader = PdfReader(pdf_filepath)
+      metadata = reader.metadata
+
+      if "/Signature" not in metadata:
+         return False, "No signature found in the PDF"
+
+      signature = base64.b64decode(metadata["/Signature"])
+
+      pdf_bytes = b"".join([page.extract_text().encode() for page in reader.pages if page.extract_text()])
+      hash_obj = SHA256.new(pdf_bytes)
+
+      pkcs1_15.new(public_key).verify(hash_obj, signature)
+      return True, "Signature verified successfully"
+   except ValueError:
+      return False, "Invalid signature"
+   except Exception as e:
+      return False, f"Verification failed"
