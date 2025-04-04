@@ -1,3 +1,9 @@
+## @file PageSign.py
+## @brief PDF signing page implementation
+##
+## Contains the UI and logic for the PDF signing page, allowing users
+## to sign PDF documents with their private key.
+
 import logging
 
 from PyQt6.QtCore import Qt
@@ -12,8 +18,12 @@ from utility.pdf_sign import sign_pdf_file
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
-
+## @brief PDF signing page class
+##
+## Provides UI for selecting and signing PDF documents using a private key
 class SignPage(QWidget):
+    ## @brief Initializes the sign page
+    ## @param parent Parent widget (main application)
     def __init__(self, parent):
         logger.info("Initializing SignPage UI...")
         try:
@@ -27,6 +37,7 @@ class SignPage(QWidget):
         else:
             logger.info("SignPage initialized successfully")
 
+    ## @brief Sets up the user interface components
     def _init_ui(self):
         layout = QVBoxLayout()
 
@@ -57,8 +68,7 @@ class SignPage(QWidget):
         layout.addWidget(self._group)
         self.setLayout(layout)
 
-    # ========== REFRESH PAGE ==========
-
+    ## @brief Updates page state based on USB and key availability
     def refresh_page(self):
         if self.parent_app.usb_path is None or self.parent_app.private_key_found == False:
             self.setEnabled(False)
@@ -68,6 +78,7 @@ class SignPage(QWidget):
             change_opacity(widget=self, value=1.0)
 
 
+    ## @brief Opens a file dialog to select a PDF file for signing
     def _select_pdf_file(self):
         logger.info("User prompted to select PDF file to sign")
         pdf_to_sign_path, _ = QFileDialog.getOpenFileName(
@@ -83,6 +94,8 @@ class SignPage(QWidget):
         else:
             logger.info("User cancelled PDF selection")
 
+    ## @brief Validates user input before signing
+    ## @return Boolean indicating if validation passed
     def _validate_user_entries(self):
         if not self._input_sign_pin.text():
             error_message = "PIN is empty"
@@ -121,6 +134,7 @@ class SignPage(QWidget):
             return False
         return True
 
+    ## @brief Initiates the PDF signing process with the private key
     def _sign_pdf_file(self):
         logger.info("User prompted to sign PDF file")
         if not self._validate_user_entries():
@@ -144,10 +158,13 @@ class SignPage(QWidget):
         self._pdf_worker_thread.task_finished_signal.connect(self._pdf_worker_task_finished)
         self._pdf_worker_thread.start()
 
+    ## @brief Updates progress dialog with status from the worker thread
+    ## @param message Status message to display
     def _pdf_worker_update_progress(self, message):
         logger.info(f"PDF signing progress: {message}")
         self._progress_dialog.setLabelText(message)
 
+    ## @brief Handles completion of the PDF signing process
     def _pdf_worker_task_finished(self):
         self._progress_dialog.close()
 

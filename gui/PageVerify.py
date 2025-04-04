@@ -1,3 +1,9 @@
+## @file PageVerify.py
+## @brief PDF signature verification page implementation
+##
+## Contains the UI and logic for the signature verification page, allowing users
+## to verify PDF document signatures using the public key.
+
 import logging
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
@@ -12,8 +18,12 @@ from utility.misc import change_opacity
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
-
+## @brief PDF signature verification page class
+##
+## Provides UI for selecting and verifying signed PDF documents using a public key
 class VerifyPage(QWidget):
+    ## @brief Initializes the verify page
+    ## @param parent Parent widget (main application)
     def __init__(self, parent):
         logger.info("Initializing VerifyPage UI...")
         try:
@@ -27,6 +37,7 @@ class VerifyPage(QWidget):
         else:
             logger.info("VerifyPage initialized successfully")
 
+    ## @brief Sets up the user interface components
     def _init_ui(self):
         layout = QVBoxLayout()
 
@@ -55,6 +66,7 @@ class VerifyPage(QWidget):
         layout.addWidget(group)
         self.setLayout(layout)
 
+    ## @brief Updates page state based on public key availability
     def refresh_page(self):
         if self.parent_app.public_key_found == False:
             self.setEnabled(False)
@@ -63,6 +75,7 @@ class VerifyPage(QWidget):
             self.setEnabled(True)
             change_opacity(widget=self, value=1.0)
 
+    ## @brief Opens a file dialog to select a signed PDF file for verification
     def _select_pdf_file(self):
         logger.info("User prompted to select PDF file to verify")
         pdf_to_verify_path, _ = QFileDialog.getOpenFileName(
@@ -78,6 +91,8 @@ class VerifyPage(QWidget):
         else:
             logger.info("User cancelled PDF selection")
 
+    ## @brief Validates user input before verification
+    ## @return Boolean indicating if validation passed
     def _validate_user_entries(self):
         if not self.pdf_filepath:
             error_message = "No PDF file selected"
@@ -103,6 +118,7 @@ class VerifyPage(QWidget):
             return False
         return True
 
+    ## @brief Initiates the PDF signature verification process
     def _verify_pdf_file(self):
         logger.info("User prompted to verify PDF signature")
         if not self._validate_user_entries():
@@ -129,10 +145,15 @@ class VerifyPage(QWidget):
         self._verify_worker_thread.task_finished_signal.connect(self._verify_worker_task_finished)
         self._verify_worker_thread.start()
 
+    ## @brief Updates progress dialog with status from the worker thread
+    ## @param message Status message to display
     def _verify_worker_update_progress(self, message):
         logger.info(f"PDF verification progress: {message}")
         self._progress_dialog.setLabelText(message)
 
+    ## @brief Handles completion of the verification process
+    ## @param is_valid Boolean indicating if signature is valid
+    ## @param message Message explaining verification result
     def _verify_worker_task_finished(self, is_valid, message):
         self._progress_dialog.close()
         if is_valid:

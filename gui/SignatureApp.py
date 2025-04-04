@@ -1,3 +1,9 @@
+## @file SignatureApp.py
+## @brief Main application window class
+##
+## Contains the main window of the application with all the UI components
+## and handles navigation between pages.
+
 import logging
 from pathlib import Path
 
@@ -18,9 +24,11 @@ from utility.usb_handler import check_for_usb_device, search_usb_for_private_key
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
+## @brief Main application window class
+##
+## Manages the main application window, page switching, and USB detection
 class SignatureApp(QWidget):
-    # ========== INITIALIZE GUI ==========
-
+    ## @brief Initializes the main application window
     def __init__(self):
         self._main_layout = None
         self._side_menu = None
@@ -36,12 +44,17 @@ class SignatureApp(QWidget):
         self._page_keygen = None
 
         # USB and Key handling
+        ## @brief Path to the detected USB device
         self.usb_path : Path | None = None
 
+        ## @brief Path to the private key file on USB
         self.private_key_path : Path | None = None
+        ## @brief Flag indicating if a private key was found
         self.private_key_found : bool = False
-        
+
+        ## @brief Path to the public key file on local machine
         self.public_key_path : Path | None = None
+        ## @brief Flag indicating if a public key was found
         self.public_key_found : bool = False
 
         logger.info("==== INITIALIZING GUI ====")
@@ -52,6 +65,7 @@ class SignatureApp(QWidget):
 
         self._refresh_pages()
 
+    ## @brief Sets up the user interface
     def _init_ui(self):
         self.setWindowTitle(MAIN_WINDOW_TITLE)
         self.setWindowIcon(QIcon(ICON_FILE_PATH))
@@ -72,14 +86,13 @@ class SignatureApp(QWidget):
 
         self.setLayout(self._main_layout)
 
-    # ========== PAGE SWITCHING ==========
-
+    ## @brief Switches to the specified page
+    ## @param page_name Name of the page to switch to
     def _switch_page(self, page_name):
         self._content_area.setCurrentWidget(self._content_area.findChild(QWidget, page_name))
         logger.info(f"Switched to page {page_name}")
 
-    # ========== USB HANDLING ==========
-
+    ## @brief Checks USB status and updates the UI
     def _update_usb_status(self):
         logger.info("Checking for USB devices...")
         result, drives = check_for_usb_device()
@@ -138,8 +151,7 @@ class SignatureApp(QWidget):
             f"{local_public_key_found_status}"
         )
 
-    # ========== REFRESH PAGE ==========
-
+    ## @brief Refreshes all pages status periodically
     def _refresh_pages(self):
         logger.info("Refreshing pages...")
         self._update_usb_status()
@@ -148,8 +160,7 @@ class SignatureApp(QWidget):
         self._page_verify.refresh_page()
         QTimer.singleShot(2000, self._refresh_pages)
 
-    # ========== STYLESHEET ==========
-
+    ## @brief Loads the application stylesheet from CSS file
     def _load_stylesheet(self):
         try:
             with open(STYLESHEET_FILE_PATH) as f:
@@ -159,8 +170,7 @@ class SignatureApp(QWidget):
         else:
             logger.info("CSS file loaded successfully")
 
-    # ========== SIDE MENU ==========
-
+    ## @brief Creates the side navigation menu
     def _create_side_menu(self):
         self._side_menu = QVBoxLayout()
         self._side_menu.setSpacing(15)
@@ -181,8 +191,7 @@ class SignatureApp(QWidget):
 
         self._side_menu.addStretch()
 
-    # ========== CONTENT AREA ==========
-
+    ## @brief Creates the content area with all pages
     def _create_content_area(self):
         self._content_area = QStackedWidget(self)
 

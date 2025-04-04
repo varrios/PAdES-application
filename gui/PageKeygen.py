@@ -1,3 +1,9 @@
+## @file PageKeygen.py
+## @brief Key generation page implementation
+##
+## Contains the UI and logic for the key generation page, allowing users
+## to create and encrypt RSA key pairs.
+
 import logging
 
 from PyQt6.QtCore import Qt
@@ -11,8 +17,12 @@ from utility.misc import change_opacity
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
-
+## @brief Key generation page class
+##
+## Provides UI for generating RSA key pairs and encrypting private keys
 class KeygenPage(QWidget):
+    ## @brief Initializes the key generation page
+    ## @param parent Parent widget (main application)
     def __init__(self, parent):
         self._numpad_buttons = None
         self._layout = None
@@ -36,6 +46,7 @@ class KeygenPage(QWidget):
         else:
             logger.info("KeygenPage initialized successfully")
 
+    ## @brief Sets up the user interface components
     def _init_ui(self):
         self._layout = QVBoxLayout()
 
@@ -67,8 +78,7 @@ class KeygenPage(QWidget):
         self._layout.addWidget(self._group)
         self.setLayout(self._layout)
 
-    # ========== PINPAD HANDLING ==========
-
+    ## @brief Initializes the PIN pad for secure PIN entry
     def _pinpad_init(self):
         self._pin_layout = QHBoxLayout()
         self._input_pin = QLineEdit()
@@ -108,13 +118,17 @@ class KeygenPage(QWidget):
         self._numpad_layout.addWidget(self._btn_backspace, 3, 0)
         self._numpad_layout.addWidget(self._btn_clear, 3, 2)
 
+    ## @brief Adds a digit to the PIN input field
+    ## @param digit Digit to add (0-9)
     def _add_digit(self, digit):
         if len(self._input_pin.text()) < MAX_PIN_LENGTH:
             self._input_pin.setText(self._input_pin.text() + str(digit))
 
+    ## @brief Removes the last digit from the PIN input field
     def _remove_digit(self):
         self._input_pin.setText(self._input_pin.text()[:-1])
 
+    ## @brief Toggles PIN visibility between plain text and masked text
     def _toggle_pin_visibility(self):
         if self._btn_toggle_pin.isChecked():
             self._input_pin.setEchoMode(QLineEdit.EchoMode.Normal)
@@ -123,8 +137,7 @@ class KeygenPage(QWidget):
             self._input_pin.setEchoMode(QLineEdit.EchoMode.Password)
             self._btn_toggle_pin.setText("👁")
 
-    # ========== REFRESH PAGE ==========
-
+    ## @brief Updates page state based on USB connectivity
     def refresh_page(self):
         if self.parent_app.usb_path is None:
             self.setEnabled(False)
@@ -133,8 +146,8 @@ class KeygenPage(QWidget):
             self.setEnabled(True)
             change_opacity(widget=self, value=1.0)
 
-    # ========== HELPER FUNCTIONS ==========
-
+    ## @brief Validates user input before key generation
+    ## @return Boolean indicating if validation passed
     def _validate_user_entries(self):
         if not self._input_pin.text():
             error_message = "PIN is empty"
@@ -163,8 +176,7 @@ class KeygenPage(QWidget):
         return True
 
 
-    # ========== RSA WORKER THREADED FUNCTIONALITY ==========
-
+    ## @brief Initiates RSA key pair generation and encryption process
     def _generate_and_encrypt_keypair(self):
         logger.info("User prompted for key generation and encryption")
         if not self._validate_user_entries():
@@ -187,10 +199,13 @@ class KeygenPage(QWidget):
         self._rsa_worker_thread.task_finished_signal.connect(self._rsa_worker_task_finished)
         self._rsa_worker_thread.start()
 
+    ## @brief Updates progress dialog with status from the worker thread
+    ## @param message Status message to display
     def _rsa_worker_update_progress(self, message):
         logger.info(f"Key generation and encryption progress: {message}")
         self._progress_dialog.setLabelText(message)
 
+    ## @brief Handles completion of the key generation process
     def _rsa_worker_task_finished(self):
         self._progress_dialog.close()
 

@@ -9,10 +9,16 @@ from Cryptodome.Signature import pkcs1_15
 from PyPDF2 import PdfReader, PdfWriter
 
 
+## @brief Exception raised when private key decryption fails
 class DecryptionError(Exception):
    pass
 
 
+## @brief Decrypt a private key using a PIN
+## @param private_key_filepath Path to the encrypted private key file
+## @param pin User PIN for decryption
+## @return Decrypted RSA key object
+## @throws DecryptionError if PIN is incorrect or decryption fails
 def decrypt_private_key(private_key_filepath, pin):
    try:
       with open(private_key_filepath, "rb") as f:
@@ -29,7 +35,9 @@ def decrypt_private_key(private_key_filepath, pin):
 
 
 
-
+## @brief Signs a PDF file using a private key
+## @param decrypted_private_key The decrypted RSA private key
+## @param pdf_filepath Path to the PDF file to be signed
 def sign_pdf_file(decrypted_private_key, pdf_filepath):
    reader = PdfReader(pdf_filepath)
    writer = PdfWriter()
@@ -49,6 +57,10 @@ def sign_pdf_file(decrypted_private_key, pdf_filepath):
    with open(os.path.join(dir_path, signed_pdf_filename), "wb") as f:
       writer.write(f)
 
+## @brief Verifies the signature of a signed PDF file
+## @param pdf_filepath Path to the signed PDF file
+## @param public_key_filepath Path to the public key file
+## @return Tuple (is_valid, message) where is_valid is a boolean indicating if the signature is valid
 def verify_pdf_signature(pdf_filepath, public_key_filepath):
    try:
       with open(public_key_filepath, "rb") as f:
