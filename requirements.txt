@@ -4,3 +4,4 @@ PyQt6==6.8.1
 PyQt6_sip==13.10.0
 python-dotenv==1.1.0
 pywin32==308
+PyPDF2==3.0.1
