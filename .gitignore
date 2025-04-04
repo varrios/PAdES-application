@@ -2,6 +2,7 @@
 keys/
 logs/
 sample_pdf_files/
+docs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
