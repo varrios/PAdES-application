@@ -39,23 +39,26 @@ def decrypt_private_key(private_key_filepath, pin):
 ## @param decrypted_private_key The decrypted RSA private key
 ## @param pdf_filepath Path to the PDF file to be signed
 def sign_pdf_file(decrypted_private_key, pdf_filepath):
-   reader = PdfReader(pdf_filepath)
-   writer = PdfWriter()
+    reader = PdfReader(pdf_filepath)
+    writer = PdfWriter()
 
-   for page in reader.pages:
-      writer.add_page(page)
+    if "/Signature" in reader.metadata:
+      raise ValueError("PDF already has a signature.")
 
-   pdf_bytes = b"".join([page.extract_text().encode() for page in reader.pages if page.extract_text()])
-   hash_obj = SHA256.new(pdf_bytes)
+    for page in reader.pages:
+        writer.add_page(page)
 
-   signature = pkcs1_15.new(decrypted_private_key).sign(hash_obj)
+    pdf_bytes = b"".join([page.extract_text().encode() for page in reader.pages if page.extract_text()])
+    hash_obj = SHA256.new(pdf_bytes)
 
-   writer.add_metadata({"/Signature": base64.b64encode(signature).decode()})
+    signature = pkcs1_15.new(decrypted_private_key).sign(hash_obj)
 
-   dir_path, filename = os.path.split(pdf_filepath)
-   signed_pdf_filename = f"SIGNED_{filename}"
-   with open(os.path.join(dir_path, signed_pdf_filename), "wb") as f:
-      writer.write(f)
+    writer.add_metadata({"/Signature": base64.b64encode(signature).decode()})
+
+    dir_path, filename = os.path.split(pdf_filepath)
+    signed_pdf_filename = f"SIGNED_{filename}"
+    with open(os.path.join(dir_path, signed_pdf_filename), "wb") as f:
+        writer.write(f)
 
 ## @brief Verifies the signature of a signed PDF file
 ## @param pdf_filepath Path to the signed PDF file
