@@ -16,7 +16,7 @@ from PyQt6.QtWidgets import (
 
 
 from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERIFY_PAGE_NAME, \
-    MAIN_WINDOW_TITLE, ICON_FILE_PATH, STYLESHEET_FILE_PATH, KEYS_DIR_PATH
+    MAIN_WINDOW_TITLE, ICON_FILE_PATH, STYLESHEET_FILE_PATH, KEYS_DIR_PATH, AUXILIARY_WINDOW_TITLE
 from gui.PageKeygen import KeygenPage
 from gui.PageSign import SignPage
 from gui.PageVerify import VerifyPage
@@ -27,7 +27,7 @@ logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 ## @brief Main application window class
 ##
 ## Manages the main application window, page switching, and USB detection
-class SignatureApp(QWidget):
+class AuxiliaryApp(QWidget):
     ## @brief Initializes the main application window
     def __init__(self):
         self._main_layout = None
@@ -35,12 +35,8 @@ class SignatureApp(QWidget):
         self._content_area = None
 
         self._btn_usb = None
-        self._btn_verify = None
-        self._btn_sign = None
-        self._btn_keygen = None
 
-        self._page_verify = None
-        self._page_sign = None
+        self._page_keygen = None
 
         # USB and Key handling
         ## @brief Path to the detected USB device
@@ -56,17 +52,17 @@ class SignatureApp(QWidget):
         ## @brief Flag indicating if a public key was found
         self.public_key_found : bool = False
 
-        logger.info("==== INITIALIZING GUI ====")
+        logger.info("[AUXILLARY] ==== INITIALIZING GUI ====")
         super().__init__()
         self._init_ui()
         self.show()
-        logger.info("==== GUI INITIALIZATION FINISHED ====")
+        logger.info("[AUXILLARY] ==== GUI INITIALIZATION FINISHED ====")
 
         self._refresh_pages()
 
     ## @brief Sets up the user interface
     def _init_ui(self):
-        self.setWindowTitle(MAIN_WINDOW_TITLE)
+        self.setWindowTitle(AUXILIARY_WINDOW_TITLE)
         self.setWindowIcon(QIcon(ICON_FILE_PATH))
         self.setGeometry(100, 100, 900, 500)
 
@@ -85,11 +81,7 @@ class SignatureApp(QWidget):
 
         self.setLayout(self._main_layout)
 
-    ## @brief Switches to the specified page
-    ## @param page_name Name of the page to switch to
-    def _switch_page(self, page_name):
-        self._content_area.setCurrentWidget(self._content_area.findChild(QWidget, page_name))
-        logger.info(f"Switched to page {page_name}")
+
 
     ## @brief Checks USB status and updates the UI
     def _update_usb_status(self):
@@ -154,8 +146,7 @@ class SignatureApp(QWidget):
     def _refresh_pages(self):
         logger.info("Refreshing pages...")
         self._update_usb_status()
-        self._page_sign.refresh_page()
-        self._page_verify.refresh_page()
+        self._page_keygen.refresh_page()
         QTimer.singleShot(2000, self._refresh_pages)
 
     ## @brief Loads the application stylesheet from CSS file
@@ -173,18 +164,10 @@ class SignatureApp(QWidget):
         self._side_menu = QVBoxLayout()
         self._side_menu.setSpacing(15)
 
-        self._btn_sign = QPushButton("✍️ Sign PDF", self)
-        self._btn_verify = QPushButton("✅ Verify Signature", self)
         self._btn_usb = QPushButton("USB Status: ❌ No USB detected", self)
         self._btn_usb.setDisabled(True)
-
-        for btn in [self._btn_sign, self._btn_verify, self._btn_usb]:
-            if btn == self._btn_usb:
-                btn.setFixedHeight(180)
-            else:
-                btn.setFixedHeight(50)
-
-            self._side_menu.addWidget(btn)
+        self._btn_usb.setFixedHeight(180)
+        self._side_menu.addWidget(self._btn_usb)
 
         self._side_menu.addStretch()
 
@@ -192,11 +175,6 @@ class SignatureApp(QWidget):
     def _create_content_area(self):
         self._content_area = QStackedWidget(self)
 
-        self._page_sign = SignPage(parent=self)
-        self._page_verify = VerifyPage(parent=self)
+        self._page_keygen = KeygenPage(parent=self)
 
-        self._content_area.addWidget(self._page_sign)
-        self._content_area.addWidget(self._page_verify)
-
-        self._btn_sign.clicked.connect(lambda x: self._switch_page(page_name=SIGN_PAGE_NAME))
-        self._btn_verify.clicked.connect(lambda x: self._switch_page(page_name=VERIFY_PAGE_NAME))
+        self._content_area.addWidget(self._page_keygen)

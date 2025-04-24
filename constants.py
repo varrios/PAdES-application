@@ -57,3 +57,6 @@ VERIFY_PAGE_NAME = "verify_page"
 
 ## @brief Title of the main application window
 MAIN_WINDOW_TITLE = "PAdES Signature App"
+
+## @brief Title of the auxiliary application window
+AUXILIARY_WINDOW_TITLE = "PAdES Auxiliary App"
