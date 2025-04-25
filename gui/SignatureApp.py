@@ -1,5 +1,5 @@
 ## @file SignatureApp.py
-## @brief Main application window class
+## @brief Signature application window class
 ##
 ## Contains the main window of the application with all the UI components
 ## and handles navigation between pages.
@@ -24,7 +24,7 @@ from utility.usb_handler import check_for_usb_device, search_usb_for_private_key
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
-## @brief Main application window class
+## @brief Signature application window class
 ##
 ## Manages the main application window, page switching, and USB detection
 class SignatureApp(QWidget):
@@ -92,6 +92,10 @@ class SignatureApp(QWidget):
         logger.info(f"Switched to page {page_name}")
 
     ## @brief Checks USB status and updates the UI
+    ##
+    ## Detects USB devices, searches for private keys on USB drives and public keys
+    ## on the local machine. Updates instance variables with found paths and
+    ## updates the USB status button text to display the current status.
     def _update_usb_status(self):
         logger.info("Checking for USB devices...")
         result, drives = check_for_usb_device()
@@ -151,6 +155,9 @@ class SignatureApp(QWidget):
         )
 
     ## @brief Refreshes all pages status periodically
+    ##
+    ## Updates USB status and refreshes all application pages.
+    ## Sets a timer to call itself again after 2000ms (2 seconds).
     def _refresh_pages(self):
         logger.info("Refreshing pages...")
         self._update_usb_status()
@@ -159,6 +166,9 @@ class SignatureApp(QWidget):
         QTimer.singleShot(2000, self._refresh_pages)
 
     ## @brief Loads the application stylesheet from CSS file
+    ##
+    ## Attempts to read and apply the CSS style from the file specified in STYLESHEET_FILE_PATH.
+    ## Logs success or failure of the operation.
     def _load_stylesheet(self):
         try:
             with open(STYLESHEET_FILE_PATH) as f:
@@ -169,6 +179,9 @@ class SignatureApp(QWidget):
             logger.info("CSS file loaded successfully")
 
     ## @brief Creates the side navigation menu
+    ##
+    ## Sets up the layout and buttons for the side navigation menu,
+    ## including sign and verify buttons and the USB status display.
     def _create_side_menu(self):
         self._side_menu = QVBoxLayout()
         self._side_menu.setSpacing(15)
@@ -189,6 +202,9 @@ class SignatureApp(QWidget):
         self._side_menu.addStretch()
 
     ## @brief Creates the content area with all pages
+    ##
+    ## Initializes the stacked widget for content area, creates all page instances,
+    ## adds them to the widget stack, and connects navigation buttons to page switching.
     def _create_content_area(self):
         self._content_area = QStackedWidget(self)
 

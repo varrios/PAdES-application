@@ -11,7 +11,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from PyQt6.QtWidgets import QApplication
 
 from gui.AuxiliaryApp import AuxiliaryApp
-from gui.SignatureApp import SignatureApp
 from logger.logger import initialize_logger
 
 logger = initialize_logger()
@@ -24,7 +23,6 @@ def main() -> None:
     app = QApplication(sys.argv)
     main_window = AuxiliaryApp()
     app.exec()
-
 
     logger.info('Auxiliary application exited')
 

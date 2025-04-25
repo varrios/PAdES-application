@@ -1,8 +1,7 @@
-## @file SignatureApp.py
-## @brief Main application window class
+## @file AuxiliaryApp.py
+## @brief Auxiliary application window class
 ##
-## Contains the main window of the application with all the UI components
-## and handles navigation between pages.
+## Contains the main window of the auxiliary application with all the UI components.
 
 import logging
 from pathlib import Path
@@ -13,22 +12,19 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QStackedWidget
 )
 
-
-
-from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERIFY_PAGE_NAME, \
-    MAIN_WINDOW_TITLE, ICON_FILE_PATH, STYLESHEET_FILE_PATH, KEYS_DIR_PATH, AUXILIARY_WINDOW_TITLE
+from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, \
+    ICON_FILE_PATH, STYLESHEET_FILE_PATH, KEYS_DIR_PATH, AUXILIARY_WINDOW_TITLE
 from gui.PageKeygen import KeygenPage
-from gui.PageSign import SignPage
-from gui.PageVerify import VerifyPage
 from utility.usb_handler import check_for_usb_device, search_usb_for_private_key, search_local_machine_for_public_key
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
-## @brief Main application window class
+## @brief Auxiliary application window class
 ##
-## Manages the main application window, page switching, and USB detection
+## Manages the auxiliary application window that focuses on key generation functionality.
+## Includes USB detection and provides information about key status.
 class AuxiliaryApp(QWidget):
-    ## @brief Initializes the main application window
+    ## @brief Initializes the auxiliary application window
     def __init__(self):
         self._main_layout = None
         self._side_menu = None
@@ -52,11 +48,11 @@ class AuxiliaryApp(QWidget):
         ## @brief Flag indicating if a public key was found
         self.public_key_found : bool = False
 
-        logger.info("[AUXILLARY] ==== INITIALIZING GUI ====")
+        logger.info("==== AUXILIARY APP INITIALIZING GUI ====")
         super().__init__()
         self._init_ui()
         self.show()
-        logger.info("[AUXILLARY] ==== GUI INITIALIZATION FINISHED ====")
+        logger.info("==== AUXILIARY APP GUI INITIALIZATION FINISHED ====")
 
         self._refresh_pages()
 

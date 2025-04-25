@@ -4,7 +4,7 @@ from time import sleep
 from PyQt6.QtCore import QThread, pyqtSignal
 
 from constants import KEYS_DIR_PATH
-from utility.keygen import generate_RSA_keypair, encrypt_private_key
+from utility.keygen import generate_rsa_keypair, encrypt_private_key
 
 ## @brief Worker thread for RSA key generation and encryption
 ##
@@ -34,7 +34,7 @@ class RSAWorkerThread(QThread):
         try:
             sleep(1)
             self.change_progress_signal.emit("Generating RSA keypair...")
-            private_key, public_key = generate_RSA_keypair()
+            private_key, public_key = generate_rsa_keypair()
             sleep(0.5)
 
             self.change_progress_signal.emit("Encrypting private key...")

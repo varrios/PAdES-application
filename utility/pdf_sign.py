@@ -1,3 +1,9 @@
+## @file pdf_sign.py
+## @brief PDF signing and verification functionality
+##
+## Provides functions to sign PDF files with RSA signatures and verify
+## the authenticity of signed documents.
+
 import base64
 import hashlib
 import os
@@ -19,7 +25,7 @@ class DecryptionError(Exception):
 ## @param pin User PIN for decryption
 ## @return Decrypted RSA key object
 ## @throws DecryptionError if PIN is incorrect or decryption fails
-def decrypt_private_key(private_key_filepath, pin):
+def decrypt_private_key(private_key_filepath: str, pin: str) -> RSA.RsaKey:
    try:
       with open(private_key_filepath, "rb") as f:
          data = f.read()
@@ -38,7 +44,8 @@ def decrypt_private_key(private_key_filepath, pin):
 ## @brief Signs a PDF file using a private key
 ## @param decrypted_private_key The decrypted RSA private key
 ## @param pdf_filepath Path to the PDF file to be signed
-def sign_pdf_file(decrypted_private_key, pdf_filepath):
+## @return None
+def sign_pdf_file(decrypted_private_key: RSA.RsaKey, pdf_filepath: str) -> None:
     reader = PdfReader(pdf_filepath)
     writer = PdfWriter()
 
@@ -64,7 +71,7 @@ def sign_pdf_file(decrypted_private_key, pdf_filepath):
 ## @param pdf_filepath Path to the signed PDF file
 ## @param public_key_filepath Path to the public key file
 ## @return Tuple (is_valid, message) where is_valid is a boolean indicating if the signature is valid
-def verify_pdf_signature(pdf_filepath, public_key_filepath):
+def verify_pdf_signature(pdf_filepath: str, public_key_filepath: str) -> tuple[bool, str]:
    try:
       with open(public_key_filepath, "rb") as f:
          public_key = RSA.import_key(f.read())
@@ -82,7 +89,9 @@ def verify_pdf_signature(pdf_filepath, public_key_filepath):
 
       pkcs1_15.new(public_key).verify(hash_obj, signature)
       return True, "Signature verified successfully"
-   except ValueError:
-      return False, "Invalid signature"
+   except ValueError as ve:
+      return False, f"Invalid signature: {str(ve)}"
+   except FileNotFoundError as fnf:
+      return False, f"File not found: {str(fnf)}"
    except Exception as e:
-      return False, f"Verification failed"
+      return False, f"Verification failed: {str(e)}"
