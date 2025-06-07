@@ -1,0 +1,7 @@
+<map id="gui.AuxiliaryApp.AuxiliaryApp._load_stylesheet" name="gui.AuxiliaryApp.AuxiliaryApp._load_stylesheet">
+<area shape="rect" id="Node000001" title="Loads the application stylesheet from CSS file." alt="" coords="252,37,443,77"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html#acde95e01fef9d5b4350137ffb06aa464" title="Sets up the user interface." alt="" coords="9,5,200,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,46,200,41,201,35,239,40"/>
+<area shape="rect" id="Node000003" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#aae1558e10243dfc609ad7968eff6a6e8" title="Sets up the user interface." alt="" coords="5,69,204,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,74,205,79,204,74,238,69"/>
+</map>

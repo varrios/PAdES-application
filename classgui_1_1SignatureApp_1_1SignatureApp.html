@@ -84,17 +84,17 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Main application window class.  
+<p>Signature application window class.  
  <a href="classgui_1_1SignatureApp_1_1SignatureApp.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for gui.SignatureApp.SignatureApp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp__inherit__graph.svg" width="227" height="630"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp__inherit__graph.svg" width="227" height="610"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Collaboration diagram for gui.SignatureApp.SignatureApp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp__coll__graph.svg" width="227" height="630"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp__coll__graph.svg" width="227" height="610"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -160,13 +160,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab9b997681b8e2d8292a78cf3c48fd940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d68c35e744730845577523acc0ea96b" id="r_a9d68c35e744730845577523acc0ea96b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgui_1_1SignatureApp_1_1SignatureApp.html#a9d68c35e744730845577523acc0ea96b">_page_sign</a></td></tr>
 <tr class="separator:a9d68c35e744730845577523acc0ea96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cd089d7fefd047c19c1d8c449bb16ab" id="r_a4cd089d7fefd047c19c1d8c449bb16ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgui_1_1SignatureApp_1_1SignatureApp.html#a4cd089d7fefd047c19c1d8c449bb16ab">_page_keygen</a></td></tr>
-<tr class="separator:a4cd089d7fefd047c19c1d8c449bb16ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a469120b633fa4c10e0e2024161b84904" id="r_a469120b633fa4c10e0e2024161b84904"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgui_1_1SignatureApp_1_1SignatureApp.html#a469120b633fa4c10e0e2024161b84904">_refresh_pages</a></td></tr>
 <tr class="separator:a469120b633fa4c10e0e2024161b84904"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Main application window class. </p>
+<div class="textblock"><p>Signature application window class. </p>
 <p>Manages the main application window, page switching, and USB detection </p>
 
 <p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00030">30</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
@@ -219,8 +217,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Creates the content area with all pages. </p>
+<p>Initializes the stacked widget for content area, creates all page instances, adds them to the widget stack, and connects navigation buttons to page switching. </p>
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00195">195</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00208">208</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -229,7 +228,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a33e33c901f8ba992a917c8a3cff0f48f_icgraph.svg" width="456" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a33e33c901f8ba992a917c8a3cff0f48f_icgraph.svg" width="456" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -259,12 +258,13 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Creates the side navigation menu. </p>
+<p>Sets up the layout and buttons for the side navigation menu, including sign and verify buttons and the USB status display. </p>
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00174">174</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00185">185</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_af2d05d73902e7d75d029b4d750aced90_icgraph.svg" width="456" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_af2d05d73902e7d75d029b4d750aced90_icgraph.svg" width="456" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -295,11 +295,11 @@ Here is the caller graph for this function:</div>
 
 <p>Sets up the user interface. </p>
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00069">69</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00068">68</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_aae1558e10243dfc609ad7968eff6a6e8_cgraph.svg" width="703" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_aae1558e10243dfc609ad7968eff6a6e8_cgraph.svg" width="703" height="371"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -329,12 +329,13 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Loads the application stylesheet from CSS file. </p>
+<p>Attempts to read and apply the CSS style from the file specified in STYLESHEET_FILE_PATH. Logs success or failure of the operation. </p>
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00164">164</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00172">172</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a02a03b3803e553ce31c305ce03c57c0d_icgraph.svg" width="456" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a02a03b3803e553ce31c305ce03c57c0d_icgraph.svg" width="456" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -364,12 +365,13 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Refreshes all pages status periodically. </p>
+<p>Updates USB status and refreshes all application pages. Sets a timer to call itself again after 2000ms (2 seconds). </p>
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00155">155</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00161">161</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a05689eb79af197f3b49a8fb60ba2f45e_cgraph.svg" width="456" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a05689eb79af197f3b49a8fb60ba2f45e_cgraph.svg" width="456" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -416,11 +418,11 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00091">91</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00090">90</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_ade66c4b829fed9ce83fabe6ce64cfc52_icgraph.svg" width="703" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_ade66c4b829fed9ce83fabe6ce64cfc52_icgraph.svg" width="703" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -450,12 +452,13 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Checks USB status and updates the UI. </p>
+<p>Detects USB devices, searches for private keys on USB drives and public keys on the local machine. Updates instance variables with found paths and updates the USB status button text to display the current status. </p>
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00096">96</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00099">99</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a8282a91a15ec784798a9e656b048b788_icgraph.svg" width="456" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classgui_1_1SignatureApp_1_1SignatureApp_a8282a91a15ec784798a9e656b048b788_icgraph.svg" width="456" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -605,30 +608,6 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a4cd089d7fefd047c19c1d8c449bb16ab" name="a4cd089d7fefd047c19c1d8c449bb16ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cd089d7fefd047c19c1d8c449bb16ab">&#9670;&#160;</a></span>_page_keygen</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">gui.SignatureApp.SignatureApp._page_keygen</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00044">44</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
-
-</div>
-</div>
 <a id="a9d68c35e744730845577523acc0ea96b" name="a9d68c35e744730845577523acc0ea96b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9d68c35e744730845577523acc0ea96b">&#9670;&#160;</a></span>_page_sign</h2>
 
@@ -697,7 +676,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00161">161</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00166">166</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 
 </div>
 </div>
@@ -737,7 +716,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00123">123</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00126">126</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 
 </div>
 </div>
@@ -753,7 +732,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00124">124</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00127">127</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 
 </div>
 </div>
@@ -769,7 +748,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00107">107</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00110">110</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 
 </div>
 </div>
@@ -785,7 +764,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00108">108</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00111">111</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 
 </div>
 </div>
@@ -801,7 +780,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00122">122</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SignatureApp_8py_source.html#l00125">125</a> of file <a class="el" href="SignatureApp_8py_source.html">SignatureApp.py</a>.</p>
 
 </div>
 </div>

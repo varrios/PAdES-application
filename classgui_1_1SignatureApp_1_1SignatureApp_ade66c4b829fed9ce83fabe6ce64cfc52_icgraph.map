@@ -1,7 +1,9 @@
 <map id="gui.SignatureApp.SignatureApp._switch_page" name="gui.SignatureApp.SignatureApp._switch_page">
-<area shape="rect" id="Node000001" title="Switches to the specified page." alt="" coords="499,5,697,45"/>
-<area shape="rect" id="Node000002" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#a33e33c901f8ba992a917c8a3cff0f48f" title="Creates the content area with all pages." alt="" coords="252,5,451,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="485,28,451,28,451,23,485,23"/>
-<area shape="rect" id="Node000003" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#aae1558e10243dfc609ad7968eff6a6e8" title="Sets up the user interface." alt="" coords="5,5,204,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="238,28,204,28,204,23,238,23"/>
+<area shape="rect" id="Node000001" title="Switches to the specified page." alt="" coords="499,37,697,77"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#a33e33c901f8ba992a917c8a3cff0f48f" title="Creates the content area with all pages." alt="" coords="252,37,451,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="485,60,451,60,451,55,485,55"/>
+<area shape="rect" id="Node000003" href="$classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html#acde95e01fef9d5b4350137ffb06aa464" title="Sets up the user interface." alt="" coords="9,5,200,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="238,45,200,40,200,35,239,40"/>
+<area shape="rect" id="Node000004" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#aae1558e10243dfc609ad7968eff6a6e8" title="Sets up the user interface." alt="" coords="5,69,204,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="239,75,205,79,204,74,238,69"/>
 </map>

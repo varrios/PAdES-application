@@ -1,11 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,80,84,105"/>
-<area shape="rect" id="Node000001" href="$classgui_1_1PageKeygen_1_1KeygenPage.html" title="Key generation page class." alt="" coords="140,5,348,31"/>
-<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="74,70,131,40,167,28,169,33,133,44,77,74"/>
-<area shape="rect" id="Node000002" href="$classgui_1_1PageSign_1_1SignPage.html" title="PDF signing page class." alt="" coords="160,55,328,80"/>
-<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="98,83,159,75,160,81,99,89"/>
-<area shape="rect" id="Node000003" href="$classgui_1_1PageVerify_1_1VerifyPage.html" title="PDF signature verification page class." alt="" coords="152,104,336,129"/>
-<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="98,96,152,103,151,108,97,102"/>
-<area shape="rect" id="Node000004" href="$classgui_1_1SignatureApp_1_1SignatureApp.html" title="Main application window class." alt="" coords="132,153,356,179"/>
-<area shape="poly" id="edge8_Node000000_Node000004" title=" " alt="" coords="78,110,133,138,174,151,172,156,131,143,76,115"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,104,84,129"/>
+<area shape="rect" id="Node000001" href="$classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html" title="Auxiliary application window class." alt="" coords="136,5,352,31"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="64,92,94,64,131,40,160,28,162,33,133,44,97,68,68,96"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1PageKeygen_1_1KeygenPage.html" title="Key generation page class." alt="" coords="140,55,348,80"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="97,98,131,89,179,78,180,83,133,94,98,103"/>
+<area shape="rect" id="Node000003" href="$classgui_1_1PageSign_1_1SignPage.html" title="PDF signing page class." alt="" coords="160,104,328,129"/>
+<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="98,114,160,114,160,119,98,119"/>
+<area shape="rect" id="Node000004" href="$classgui_1_1PageVerify_1_1VerifyPage.html" title="PDF signature verification page class." alt="" coords="152,153,336,179"/>
+<area shape="poly" id="edge8_Node000000_Node000004" title=" " alt="" coords="98,129,133,138,185,151,184,156,131,143,97,134"/>
+<area shape="rect" id="Node000005" href="$classgui_1_1SignatureApp_1_1SignatureApp.html" title="Signature application window class." alt="" coords="132,203,356,228"/>
+<area shape="poly" id="edge9_Node000000_Node000005" title=" " alt="" coords="69,138,98,164,133,188,166,200,164,205,131,192,95,168,65,142"/>
 </map>

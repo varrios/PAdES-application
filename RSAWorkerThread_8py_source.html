@@ -88,7 +88,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">from</span> PyQt6.QtCore <span class="keyword">import</span> QThread, pyqtSignal</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">from</span> constants <span class="keyword">import</span> KEYS_DIR_PATH</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespaceutility_1_1keygen.html">utility.keygen</a> <span class="keyword">import</span> generate_RSA_keypair, encrypt_private_key</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespaceutility_1_1keygen.html">utility.keygen</a> <span class="keyword">import</span> generate_rsa_keypair, encrypt_private_key</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="foldopen" id="foldopen00013" data-start="" data-end="">
@@ -114,7 +114,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            sleep(1)</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            self.<a class="code hl_variable" href="classutility_1_1RSAWorkerThread_1_1RSAWorkerThread.html#a3e14c52ceab64af2855ba1c19de5edc6">change_progress_signal</a>.emit(<span class="stringliteral">&quot;Generating RSA keypair...&quot;</span>)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            private_key, public_key = generate_RSA_keypair()</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            private_key, public_key = generate_rsa_keypair()</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            sleep(0.5)</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            self.<a class="code hl_variable" href="classutility_1_1RSAWorkerThread_1_1RSAWorkerThread.html#a3e14c52ceab64af2855ba1c19de5edc6">change_progress_signal</a>.emit(<span class="stringliteral">&quot;Encrypting private key...&quot;</span>)</div>

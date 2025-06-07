@@ -89,33 +89,33 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8e121131329f5273c086e4e36e3aa306" id="r_a8e121131329f5273c086e4e36e3aa306"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutility_1_1pdf__sign.html#a8e121131329f5273c086e4e36e3aa306">decrypt_private_key</a> (private_key_filepath, pin)</td></tr>
-<tr class="memdesc:a8e121131329f5273c086e4e36e3aa306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypt a private key using a PIN.  <br /></td></tr>
-<tr class="separator:a8e121131329f5273c086e4e36e3aa306"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a862a82c05ed8cdf0f41e836bb84a6396" id="r_a862a82c05ed8cdf0f41e836bb84a6396"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutility_1_1pdf__sign.html#a862a82c05ed8cdf0f41e836bb84a6396">sign_pdf_file</a> (decrypted_private_key, pdf_filepath)</td></tr>
-<tr class="memdesc:a862a82c05ed8cdf0f41e836bb84a6396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs a PDF file using a private key.  <br /></td></tr>
-<tr class="separator:a862a82c05ed8cdf0f41e836bb84a6396"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43570b143ea72c89b45d024e951ed68b" id="r_a43570b143ea72c89b45d024e951ed68b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutility_1_1pdf__sign.html#a43570b143ea72c89b45d024e951ed68b">verify_pdf_signature</a> (pdf_filepath, public_key_filepath)</td></tr>
-<tr class="memdesc:a43570b143ea72c89b45d024e951ed68b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies the signature of a signed PDF file.  <br /></td></tr>
-<tr class="separator:a43570b143ea72c89b45d024e951ed68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae254fc6ed74614ad74068193032aec00" id="r_ae254fc6ed74614ad74068193032aec00"><td class="memItemLeft" align="right" valign="top">RSA.RsaKey&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutility_1_1pdf__sign.html#ae254fc6ed74614ad74068193032aec00">decrypt_private_key</a> (str private_key_filepath, str pin)</td></tr>
+<tr class="memdesc:ae254fc6ed74614ad74068193032aec00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypt a private key using a PIN.  <br /></td></tr>
+<tr class="separator:ae254fc6ed74614ad74068193032aec00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c82b2e05178f3e3f7d023c3b535c4b5" id="r_a3c82b2e05178f3e3f7d023c3b535c4b5"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutility_1_1pdf__sign.html#a3c82b2e05178f3e3f7d023c3b535c4b5">sign_pdf_file</a> (RSA.RsaKey decrypted_private_key, str pdf_filepath)</td></tr>
+<tr class="memdesc:a3c82b2e05178f3e3f7d023c3b535c4b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs a PDF file using a private key.  <br /></td></tr>
+<tr class="separator:a3c82b2e05178f3e3f7d023c3b535c4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c5d13f934942f343114609c0a426288" id="r_a7c5d13f934942f343114609c0a426288"><td class="memItemLeft" align="right" valign="top">tuple[bool, str]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutility_1_1pdf__sign.html#a7c5d13f934942f343114609c0a426288">verify_pdf_signature</a> (str pdf_filepath, str public_key_filepath)</td></tr>
+<tr class="memdesc:a7c5d13f934942f343114609c0a426288"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies the signature of a signed PDF file.  <br /></td></tr>
+<tr class="separator:a7c5d13f934942f343114609c0a426288"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8e121131329f5273c086e4e36e3aa306" name="a8e121131329f5273c086e4e36e3aa306"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e121131329f5273c086e4e36e3aa306">&#9670;&#160;</a></span>decrypt_private_key()</h2>
+<a id="ae254fc6ed74614ad74068193032aec00" name="ae254fc6ed74614ad74068193032aec00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae254fc6ed74614ad74068193032aec00">&#9670;&#160;</a></span>decrypt_private_key()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">utility.pdf_sign.decrypt_private_key </td>
+          <td class="memname"> RSA.RsaKey utility.pdf_sign.decrypt_private_key </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">str&#160;</td>
           <td class="paramname"><em>private_key_filepath</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">str&#160;</td>
           <td class="paramname"><em>pin</em>&#160;</td>
         </tr>
         <tr>
@@ -142,26 +142,26 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="pdf__sign_8py_source.html#l00022">22</a> of file <a class="el" href="pdf__sign_8py_source.html">pdf_sign.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pdf__sign_8py_source.html#l00028">28</a> of file <a class="el" href="pdf__sign_8py_source.html">pdf_sign.py</a>.</p>
 
 </div>
 </div>
-<a id="a862a82c05ed8cdf0f41e836bb84a6396" name="a862a82c05ed8cdf0f41e836bb84a6396"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a862a82c05ed8cdf0f41e836bb84a6396">&#9670;&#160;</a></span>sign_pdf_file()</h2>
+<a id="a3c82b2e05178f3e3f7d023c3b535c4b5" name="a3c82b2e05178f3e3f7d023c3b535c4b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c82b2e05178f3e3f7d023c3b535c4b5">&#9670;&#160;</a></span>sign_pdf_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">utility.pdf_sign.sign_pdf_file </td>
+          <td class="memname"> None utility.pdf_sign.sign_pdf_file </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">RSA.RsaKey&#160;</td>
           <td class="paramname"><em>decrypted_private_key</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">str&#160;</td>
           <td class="paramname"><em>pdf_filepath</em>&#160;</td>
         </tr>
         <tr>
@@ -180,27 +180,28 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pdf__sign_8py_source.html#l00041">41</a> of file <a class="el" href="pdf__sign_8py_source.html">pdf_sign.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pdf__sign_8py_source.html#l00048">48</a> of file <a class="el" href="pdf__sign_8py_source.html">pdf_sign.py</a>.</p>
 
 </div>
 </div>
-<a id="a43570b143ea72c89b45d024e951ed68b" name="a43570b143ea72c89b45d024e951ed68b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43570b143ea72c89b45d024e951ed68b">&#9670;&#160;</a></span>verify_pdf_signature()</h2>
+<a id="a7c5d13f934942f343114609c0a426288" name="a7c5d13f934942f343114609c0a426288"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c5d13f934942f343114609c0a426288">&#9670;&#160;</a></span>verify_pdf_signature()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">utility.pdf_sign.verify_pdf_signature </td>
+          <td class="memname"> tuple[bool, str] utility.pdf_sign.verify_pdf_signature </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">str&#160;</td>
           <td class="paramname"><em>pdf_filepath</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">str&#160;</td>
           <td class="paramname"><em>public_key_filepath</em>&#160;</td>
         </tr>
         <tr>
@@ -221,7 +222,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Tuple (is_valid, message) where is_valid is a boolean indicating if the signature is valid </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pdf__sign_8py_source.html#l00067">67</a> of file <a class="el" href="pdf__sign_8py_source.html">pdf_sign.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pdf__sign_8py_source.html#l00074">74</a> of file <a class="el" href="pdf__sign_8py_source.html">pdf_sign.py</a>.</p>
 
 </div>
 </div>

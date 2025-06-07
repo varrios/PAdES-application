@@ -1,0 +1,17 @@
+<map id="gui.AuxiliaryApp.AuxiliaryApp._init_ui" name="gui.AuxiliaryApp.AuxiliaryApp._init_ui">
+<area shape="rect" id="Node000001" title="Sets up the user interface." alt="" coords="5,165,196,205"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html#a2a483b85085e5c49441bed70c42f1876" title="Creates the content area with all pages." alt="" coords="248,5,439,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,163,170,110,205,81,243,55,255,48,258,53,245,60,208,85,174,114,121,167"/>
+<area shape="rect" id="Node000003" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#a33e33c901f8ba992a917c8a3cff0f48f" title="Creates the content area with all pages." alt="" coords="244,69,443,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="143,163,243,119,264,111,266,116,245,124,145,168"/>
+<area shape="rect" id="Node000005" href="$classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html#a9b908244ca043cf125b9f023ca8a1907" title="Creates the side navigation menu." alt="" coords="248,133,439,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="196,170,234,165,235,170,197,175"/>
+<area shape="rect" id="Node000006" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#af2d05d73902e7d75d029b4d750aced90" title="Creates the side navigation menu." alt="" coords="244,197,443,237"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="197,195,231,200,230,205,196,201"/>
+<area shape="rect" id="Node000007" href="$classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html#aeeba936f77693f06dd008ce9321e9fec" title="Loads the application stylesheet from CSS file." alt="" coords="248,261,439,301"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="145,203,245,247,266,254,264,259,243,252,143,208"/>
+<area shape="rect" id="Node000008" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#a02a03b3803e553ce31c305ce03c57c0d" title="Loads the application stylesheet from CSS file." alt="" coords="244,325,443,365"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="121,204,174,257,208,286,245,311,258,317,255,322,243,316,205,290,170,261,117,207"/>
+<area shape="rect" id="Node000004" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#ade66c4b829fed9ce83fabe6ce64cfc52" title="Switches to the specified page." alt="" coords="491,69,689,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="443,87,477,87,477,92,443,92"/>
+</map>

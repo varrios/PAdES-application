@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['decryptionerror_0',['DecryptionError',['../classutility_1_1pdf__sign_1_1DecryptionError.html',1,'utility::pdf_sign']]]
+  ['auxiliaryapp_0',['AuxiliaryApp',['../classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html',1,'gui::AuxiliaryApp']]]
 ];

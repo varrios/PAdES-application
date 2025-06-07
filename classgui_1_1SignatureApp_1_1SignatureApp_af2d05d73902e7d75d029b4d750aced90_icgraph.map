@@ -1,5 +1,7 @@
 <map id="gui.SignatureApp.SignatureApp._create_side_menu" name="gui.SignatureApp.SignatureApp._create_side_menu">
-<area shape="rect" id="Node000001" title="Creates the side navigation menu." alt="" coords="252,5,451,45"/>
-<area shape="rect" id="Node000002" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#aae1558e10243dfc609ad7968eff6a6e8" title="Sets up the user interface." alt="" coords="5,5,204,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,28,204,28,204,23,238,23"/>
+<area shape="rect" id="Node000001" title="Creates the side navigation menu." alt="" coords="252,37,451,77"/>
+<area shape="rect" id="Node000002" href="$classgui_1_1AuxiliaryApp_1_1AuxiliaryApp.html#acde95e01fef9d5b4350137ffb06aa464" title="Sets up the user interface." alt="" coords="9,5,200,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,45,200,40,200,35,239,40"/>
+<area shape="rect" id="Node000003" href="$classgui_1_1SignatureApp_1_1SignatureApp.html#aae1558e10243dfc609ad7968eff6a6e8" title="Sets up the user interface." alt="" coords="5,69,204,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,75,205,79,204,74,238,69"/>
 </map>
