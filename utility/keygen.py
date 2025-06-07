@@ -1,3 +1,9 @@
+## @file keygen.py
+## @brief RSA key generation and encryption functionality
+##
+## Provides functions to generate RSA keypairs and encrypt private keys using AES.
+## Part of the "2nd auxillary application" functionality for the PAdES application.
+
 import logging
 import os
 
@@ -7,20 +13,13 @@ from Cryptodome.PublicKey import RSA
 import hashlib
 
 from constants import RSA_KEY_LENGTH, KEYS_DIR_PATH
-
-## @file keygen.py
-## @brief RSA key generation and encryption functionality
-##
-## Provides functions to generate RSA keypairs and encrypt private keys using AES.
-## Part of the "2nd auxillary application" functionality for the PAdES application.
-
 from constants import LOGGER_GLOBAL_NAME
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
 ## @brief Generates an RSA key pair with the specified key length
 ## @return Tuple containing (private_key, public_key) as bytes
-def generate_RSA_keypair():
+def generate_rsa_keypair():
     key = RSA.generate(RSA_KEY_LENGTH)
     private_key = key.export_key()
     public_key = key.publickey().export_key()

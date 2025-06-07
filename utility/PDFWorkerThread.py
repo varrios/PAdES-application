@@ -5,7 +5,7 @@ from time import sleep
 from PyQt6.QtCore import QThread, pyqtSignal
 
 from constants import KEYS_DIR_PATH, LOGGER_GLOBAL_NAME
-from utility.keygen import generate_RSA_keypair, encrypt_private_key
+from utility.keygen import generate_rsa_keypair, encrypt_private_key
 from utility.pdf_sign import decrypt_private_key, DecryptionError, sign_pdf_file
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)

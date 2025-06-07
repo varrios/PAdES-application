@@ -1,8 +1,7 @@
-## @file SignatureApp.py
-## @brief Signature application window class
+## @file AuxiliaryApp.py
+## @brief Auxiliary application window class
 ##
-## Contains the main window of the application with all the UI components
-## and handles navigation between pages.
+## Contains the main window of the auxiliary application with all the UI components.
 
 import logging
 from pathlib import Path
@@ -13,34 +12,27 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QStackedWidget
 )
 
-
-
-from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, SIGN_PAGE_NAME, VERIFY_PAGE_NAME, \
-    MAIN_WINDOW_TITLE, ICON_FILE_PATH, STYLESHEET_FILE_PATH, KEYS_DIR_PATH
+from constants import LOGGER_GLOBAL_NAME, KEYGEN_PAGE_NAME, \
+    ICON_FILE_PATH, STYLESHEET_FILE_PATH, KEYS_DIR_PATH, AUXILIARY_WINDOW_TITLE
 from gui.PageKeygen import KeygenPage
-from gui.PageSign import SignPage
-from gui.PageVerify import VerifyPage
 from utility.usb_handler import check_for_usb_device, search_usb_for_private_key, search_local_machine_for_public_key
 
 logger = logging.getLogger(LOGGER_GLOBAL_NAME)
 
-## @brief Signature application window class
+## @brief Auxiliary application window class
 ##
-## Manages the main application window, page switching, and USB detection
-class SignatureApp(QWidget):
-    ## @brief Initializes the main application window
+## Manages the auxiliary application window that focuses on key generation functionality.
+## Includes USB detection and provides information about key status.
+class AuxiliaryApp(QWidget):
+    ## @brief Initializes the auxiliary application window
     def __init__(self):
         self._main_layout = None
         self._side_menu = None
         self._content_area = None
 
         self._btn_usb = None
-        self._btn_verify = None
-        self._btn_sign = None
-        self._btn_keygen = None
 
-        self._page_verify = None
-        self._page_sign = None
+        self._page_keygen = None
 
         # USB and Key handling
         ## @brief Path to the detected USB device
@@ -56,17 +48,17 @@ class SignatureApp(QWidget):
         ## @brief Flag indicating if a public key was found
         self.public_key_found : bool = False
 
-        logger.info("==== INITIALIZING GUI ====")
+        logger.info("==== AUXILIARY APP INITIALIZING GUI ====")
         super().__init__()
         self._init_ui()
         self.show()
-        logger.info("==== GUI INITIALIZATION FINISHED ====")
+        logger.info("==== AUXILIARY APP GUI INITIALIZATION FINISHED ====")
 
         self._refresh_pages()
 
     ## @brief Sets up the user interface
     def _init_ui(self):
-        self.setWindowTitle(MAIN_WINDOW_TITLE)
+        self.setWindowTitle(AUXILIARY_WINDOW_TITLE)
         self.setWindowIcon(QIcon(ICON_FILE_PATH))
         self.setGeometry(100, 100, 900, 500)
 
@@ -85,17 +77,9 @@ class SignatureApp(QWidget):
 
         self.setLayout(self._main_layout)
 
-    ## @brief Switches to the specified page
-    ## @param page_name Name of the page to switch to
-    def _switch_page(self, page_name):
-        self._content_area.setCurrentWidget(self._content_area.findChild(QWidget, page_name))
-        logger.info(f"Switched to page {page_name}")
+
 
     ## @brief Checks USB status and updates the UI
-    ##
-    ## Detects USB devices, searches for private keys on USB drives and public keys
-    ## on the local machine. Updates instance variables with found paths and
-    ## updates the USB status button text to display the current status.
     def _update_usb_status(self):
         logger.info("Checking for USB devices...")
         result, drives = check_for_usb_device()
@@ -155,20 +139,13 @@ class SignatureApp(QWidget):
         )
 
     ## @brief Refreshes all pages status periodically
-    ##
-    ## Updates USB status and refreshes all application pages.
-    ## Sets a timer to call itself again after 2000ms (2 seconds).
     def _refresh_pages(self):
         logger.info("Refreshing pages...")
         self._update_usb_status()
-        self._page_sign.refresh_page()
-        self._page_verify.refresh_page()
+        self._page_keygen.refresh_page()
         QTimer.singleShot(2000, self._refresh_pages)
 
     ## @brief Loads the application stylesheet from CSS file
-    ##
-    ## Attempts to read and apply the CSS style from the file specified in STYLESHEET_FILE_PATH.
-    ## Logs success or failure of the operation.
     def _load_stylesheet(self):
         try:
             with open(STYLESHEET_FILE_PATH) as f:
@@ -179,40 +156,21 @@ class SignatureApp(QWidget):
             logger.info("CSS file loaded successfully")
 
     ## @brief Creates the side navigation menu
-    ##
-    ## Sets up the layout and buttons for the side navigation menu,
-    ## including sign and verify buttons and the USB status display.
     def _create_side_menu(self):
         self._side_menu = QVBoxLayout()
         self._side_menu.setSpacing(15)
 
-        self._btn_sign = QPushButton("✍️ Sign PDF", self)
-        self._btn_verify = QPushButton("✅ Verify Signature", self)
         self._btn_usb = QPushButton("USB Status: ❌ No USB detected", self)
         self._btn_usb.setDisabled(True)
-
-        for btn in [self._btn_sign, self._btn_verify, self._btn_usb]:
-            if btn == self._btn_usb:
-                btn.setFixedHeight(180)
-            else:
-                btn.setFixedHeight(50)
-
-            self._side_menu.addWidget(btn)
+        self._btn_usb.setFixedHeight(180)
+        self._side_menu.addWidget(self._btn_usb)
 
         self._side_menu.addStretch()
 
     ## @brief Creates the content area with all pages
-    ##
-    ## Initializes the stacked widget for content area, creates all page instances,
-    ## adds them to the widget stack, and connects navigation buttons to page switching.
     def _create_content_area(self):
         self._content_area = QStackedWidget(self)
 
-        self._page_sign = SignPage(parent=self)
-        self._page_verify = VerifyPage(parent=self)
+        self._page_keygen = KeygenPage(parent=self)
 
-        self._content_area.addWidget(self._page_sign)
-        self._content_area.addWidget(self._page_verify)
-
-        self._btn_sign.clicked.connect(lambda x: self._switch_page(page_name=SIGN_PAGE_NAME))
-        self._btn_verify.clicked.connect(lambda x: self._switch_page(page_name=VERIFY_PAGE_NAME))
+        self._content_area.addWidget(self._page_keygen)
